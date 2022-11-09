@@ -1,6 +1,12 @@
 extends layout
 
+
 block content
   h1= title
   p Welcome to #{title}
-  h4 Vi er bare mega seje
+  script.
+    function onButtonClick(){
+      console.log("hej")
+    }
+  button(onclick='onButtonClick()') Click
+  
