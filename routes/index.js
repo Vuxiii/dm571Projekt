@@ -2,7 +2,7 @@ var express = require('express');
 const axios = require('axios').default;
 // axios.defaults.baseURL = 'localhost:/3000';
 var router = express.Router();
-
+var pander = 0;
 class Order {
   constructor(id, productId, quantity, shipDate, status, complete ) {
     this.id = id; // int
@@ -83,14 +83,23 @@ var tag1 = new Tag( 0, "Rustfrit Stål" );
 
 
 var products = [ 
-	new Product( 0, "Pande1", categoryPande, [], tag1, "In Store", 10 ),
-	new Product( 1, "Pande2", categoryPande, [], tag1, "In Store", 4 ),
+	new Product( pander++, ("Pande" + pander), categoryPande, [], tag1, "In Store", 10 ),
+	new Product( pander++, ("Pande" + pander), categoryPande, [], tag1, "In Store", 4 ),
 ];
 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', cli: axios, clickBtn: function() { 
+  res.render('index', { title: 'Express' });
+});
+
+router.get('/users', (req, res) => {
+  res.render("users", { users: users } );
+  
+})
+
+router.get('/products', (req, res) => {
+  res.render("products", { products: products, clickBtn: function() {  //https://reqbin.com/code/javascript/wzp2hxwh/javascript-post-request-example
     console.log( 'Hej' )
     // axios.post( '/products', {} ); 
     fetch('/products', {
@@ -101,23 +110,31 @@ router.get('/', function(req, res, next) {
         },
         body: JSON.stringify({ id: 78912 })
     })
-    .then(function(response) { response.json() })
-    .then(function(response) { console.log(JSON.stringify(response)) })
-  } });
-});
-
-router.get('/users', (req, res) => {
-  res.render("users", { users: users } );
-  
-})
-
-router.get('/products', (req, res) => {
-  res.render("products", { products: products } );
+    // .then(function(response) { response.json() })
+    // .then(function(response) { console.log(JSON.stringify(response)) })
+  } } );
 })
 
 router.post('/products', (req, res) => {
-  console.log( "button clicked :0" );
-  res.end();
+  
+  console.log( req.body );
+  products.push( new Product( pander++, ("Pande" + pander), categoryPande, [], tag1, "In Store", 4 ) );
+  console.log( products );
+  // res.
+  res.render("products", { products: products, clickBtn: function() { 
+    console.log( 'Hej' )
+    // axios.post( '/products', {} ); 
+    fetch('/products', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: 78912 })
+    })
+    // .then(function(response) { response.json() })
+    // .then(function(response) { console.log(JSON.stringify(response)) })
+  } } );
 })
 
 

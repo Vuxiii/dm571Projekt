@@ -2,5 +2,14 @@ extends layout
 
 block content
     h1 Welcome to the Products Page!
+    script.
+      function onButtonClick(){
+        //- console.log('#{title}')
+        fun = #{clickBtn}
+        val = fun()
+        //- console.log(val)
+      }
+    button(onclick='onButtonClick()') Add Product
     each product in products
         h1= product.name
+    
