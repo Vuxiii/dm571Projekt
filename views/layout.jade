@@ -4,7 +4,8 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    a(href='/') Visit Home
-    a(href='/users') Visit Users
-    a(href='/products') Visit Products
+    include navbar.jade
+    a.navbar(href='/') Visit Home
+    a.navbar2(href='/users') Visit Users
+    a.navbar(href='/products') Visit Products
     block content

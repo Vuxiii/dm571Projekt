@@ -6,7 +6,13 @@ block content
   p Welcome to #{title}
   script.
     function onButtonClick(){
-      console.log("hej")
+      //- console.log('#{title}')
+      axio = #{cli}
+      fun = #{clickBtn}
+      
+      fun( axio )
+      
     }
   button(onclick='onButtonClick()') Click
+  //- button(onclick= 'clickBtn()') Click
   

@@ -1,6 +1,6 @@
 extends layout
 
 block content
-    each user in data
-        h1= user.name
-        p Welcome #{user.name}
+    each user in users
+        h1= user.firstname
+        p Welcome #{user.firstName} #{user.lastName} 

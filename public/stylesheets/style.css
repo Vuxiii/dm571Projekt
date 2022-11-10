@@ -6,3 +6,11 @@ body {
 a {
   color: #00B7FF;
 }
+
+.navbar {
+  padding-right: 1rem;
+}
+.navbar2 {
+  padding-right: 1rem;
+  color:brown;
+}
