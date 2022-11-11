@@ -2,12 +2,12 @@ var express = require('express');
 const axios = require('axios').default;
 // axios.defaults.baseURL = 'localhost:/3000';
 var router = express.Router();
-var pander = 0;
+var nextPanID = 0;
 class Order {
   constructor(id, productId, quantity, shipDate, status, complete ) {
     this.id = id; // int
-    this.productId = productId; // int
-    this.quantity = quantity; // int
+    this.productId = productId; // list<int>
+    this.quantity = quantity; // list<int>
     this.shipDate = shipDate; // string
     this.status = status; // enum placed, approved, delivered
     this.complete = complete; // bool
@@ -62,8 +62,9 @@ class Tag {
 };
 
 class Product {
-  constructor( id, name, category, photoUrls, tags, status, inventory ) {
-    this.id = id; // int
+  constructor( name, price, category, photoUrls, tags, status, inventory ) {
+    this.id = nextPanID++; // int
+    this.price = price; // float
     this.name = name; // String
     this.category = category; // Category
     this.photoUrls = photoUrls; // list<string>
@@ -74,8 +75,8 @@ class Product {
 };
 
 var users = [ 
-	new User( 0, "willi", "William", "Juhl", "asdf@student.dk", "1234", "246234", "Customer" ),
-	new User( 1, "marco", "Marcell", "KLitten", "marcer@student.dk", "5345", "245234", "Admin" ),
+	new User( "willi", "William", "Juhl", "asdf@student.dk", "1234", "246234", "Customer" ),
+	new User( "marco", "Marcell", "KLitten", "marcer@student.dk", "5345", "245234", "Admin" ),
 ];
 
 var categoryPande = new Category( 0, "Pander" );
@@ -83,9 +84,11 @@ var tag1 = new Tag( 0, "Rustfrit Stål" );
 
 
 var products = [ 
-	new Product( pander++, ("Pande" + pander), categoryPande, [], tag1, "In Store", 10 ),
-	new Product( pander++, ("Pande" + pander), categoryPande, [], tag1, "In Store", 4 ),
+	new Product( ("Pande" + nextPanID), 69.0, categoryPande, [], tag1, "In Store", 10 ),
+	new Product( ("Pande" + nextPanID), 420.69, categoryPande, [], tag1, "In Store", 4 ),
 ];
+
+var basket = new Order(0, [], [], "unknown", "??", "??" );
 
 
 /* GET home page. */
@@ -99,7 +102,16 @@ router.get('/users', (req, res) => {
 })
 
 router.get('/products', (req, res) => {
-  res.render("products", { products: products, clickBtn: function() {  //https://reqbin.com/code/javascript/wzp2hxwh/javascript-post-request-example
+  res.render("products", { products: products, addToBasket: function( pID ) {
+    fetch('/products/addToCart', {
+      method: 'POST',
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id: pID })
+  })
+  }, clickBtn: function() {  //https://reqbin.com/code/javascript/wzp2hxwh/javascript-post-request-example
     console.log( 'Hej' )
     // axios.post( '/products', {} ); 
     fetch('/products', {
@@ -108,9 +120,9 @@ router.get('/products', (req, res) => {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ id: 78912 })
+        body: JSON.stringify({ id: 'lmfao' })
     })
-    // .then(function(response) { response.json() })
+    // .then(function(response) { response.json() }) // update her :-)
     // .then(function(response) { console.log(JSON.stringify(response)) })
   } } );
 })
@@ -118,24 +130,60 @@ router.get('/products', (req, res) => {
 router.post('/products', (req, res) => {
   
   console.log( req.body );
-  products.push( new Product( pander++, ("Pande" + pander), categoryPande, [], tag1, "In Store", 4 ) );
+  products.push( new Product( ("Pande" + nextPanID), 42.5, categoryPande, [], tag1, "In Store", 4 ) );
   console.log( products );
-  // res.
-  res.render("products", { products: products, clickBtn: function() { 
-    console.log( 'Hej' )
-    // axios.post( '/products', {} ); 
-    fetch('/products', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ id: 78912 })
-    })
-    // .then(function(response) { response.json() })
-    // .then(function(response) { console.log(JSON.stringify(response)) })
-  } } );
+  res.end()
 })
+
+router.post('/products/addToCart', (req, res) => {
+  console.log( req.body.id );
+  // product = ;
+
+  // product.inventory--;
+  var p = products.find( (product) => product.id === req.body.id );
+  console.log( p )
+  addItemToBasket( p )
+
+  // products.push( new Product( ("Pande" + nextPanID), 42.5, categoryPande, [], tag1, "In Store", 4 ) );
+  // console.log( products );
+})
+
+function addItemToBasket( product ) {
+  var found = false;
+  var i;
+  for ( i = 0; i < basket.productId.length; i++ ) {
+    if ( basket.productId[i] == product.id ) {
+      found = true;
+      break;
+    }
+  }
+  console.log( "I " + (found ? "found" : "did not find") + " the product in the basket.")
+  console.log( "i is -> " + i );
+  if ( found ) {
+    console.log( basket.quantity.at(i) )
+    basket.quantity[i] += 1;
+    console.log( basket.quantity[i] )
+  } else {
+    basket.productId.push( product.id )
+    basket.quantity.push( 1 )
+  }
+  
+}
+
+router.get( '/basket', (req, res) => {
+  console.log( "At basket :0" )
+  var li = [] // Product name, quantity
+
+  for ( i = 0; i < basket.productId.length; i++ ) {
+    li.push( {
+      name: products.find( (product) => product.id == basket.productId[i] ).name,
+      quantity: basket.quantity[i]
+    })
+    
+  }
+  console.log( li )
+  res.render( 'basket', { order: li })
+} )
 
 
 module.exports = router;

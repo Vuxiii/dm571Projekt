@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  p Hej i BASKET
+  each item in order
+    h1= item.name
+    p= item.quantity

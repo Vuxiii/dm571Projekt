@@ -9,7 +9,14 @@ block content
         val = fun()
         //- console.log(val)
       }
+      function onAddToBasketClick( id ) {
+        fun = #{addToBasket}
+        fun(id)
+      }
     button(onclick='onButtonClick()') Add Product
     each product in products
         h1= product.name
+        p kr #{product.price}
+        p quantity #{product.inventory}
+        button(onclick='onAddToBasketClick( #{product.id} )') Add to basket
     
