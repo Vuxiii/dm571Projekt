@@ -103,7 +103,7 @@ router.get('/users', (req, res) => {
 
 router.get('/products', (req, res) => {
   res.render("products", { products: products, addToBasket: function( pID ) {
-    fetch('/products/addToCart', {
+    fetch('/basket', {
       method: 'POST',
       headers: {
           'Accept': 'application/json',
@@ -135,7 +135,7 @@ router.post('/products', (req, res) => {
   res.end()
 })
 
-router.post('/products/addToCart', (req, res) => {
+router.post('/basket', (req, res) => {
   console.log( req.body.id );
   // product = ;
 
