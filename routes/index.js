@@ -129,6 +129,9 @@ var buttonFuncs = {
   findByStatus: function( _status ) {
     var url = new URL( '/product/findByStatus', 'http://localhost:3000/' );
     url.searchParams.set( 'status', _status );
+    
+    return url;
+    /* 
     console.log( url );
     fetch( url, {
       method: 'GET',
@@ -145,6 +148,7 @@ var buttonFuncs = {
   }, function(reason) {
     // console.log( reason )
   });
+  */
   },
 
 };
@@ -174,7 +178,7 @@ router.get( '/product/findByStatus', (req, res) => {
   let li = findByStatus( req.query );
   if ( li === undefined ) li = [];
   
-  res.render("index", { 
+  res.render("product", { 
     products: products, 
     filteredProducts: li,
     addToBasket: buttonFuncs.addToBasket, 

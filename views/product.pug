@@ -15,8 +15,11 @@ block layout-content
         fun(id)
       }
       function onFindByStatus( status ) {
+        
+         
         fun = #{findByStatus}
-        fun(status)
+        
+        window.location.href = fun(status).toString()
       }
 
 
