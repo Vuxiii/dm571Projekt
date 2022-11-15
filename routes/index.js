@@ -142,6 +142,22 @@ router.get('/product', (req, res) => {
   res.render("product", { products: products, addToBasket: buttonFuncs.addToBasket, clickBtn: buttonFuncs.clickBtn } );
 })
 
+// Marcell Start:
+router.get('/pans', (req, res) => {
+  res.render("pans", { users: users } );
+  
+})
+
+router.get('/pots', (req, res) => {
+  res.render("pots", { users: users } );
+  
+})
+
+
+
+// Marcell Slut:
+
+
 // Add a new product to the store.
 router.post('/product', (req, res) => {
   
