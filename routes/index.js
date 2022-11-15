@@ -3,14 +3,15 @@ var express = require('express');
 var router = express.Router();
 var nextPanID = 0;
 var nextOrderID = 0;
+var userID = 0;
 
 class Order {
-  constructor(id, productId, quantity, shipDate, status, complete ) {
+  constructor(basketItems, shipDate, status, complete ) {
     // this.id = id; // int
     this.id = nextOrderID++;
     // this.productId = productId; // list<int>
     // this.quantity = quantity; // list<int>
-    this.products = []; // list<BasketItem>
+    this.products = basketItems; // list<BasketItem>
     this.shipDate = shipDate; // string
     this.status = status; // enum placed, approved, delivered
     this.complete = complete; // bool
@@ -50,8 +51,8 @@ class Category {
 };
 
 class User {
-  constructor( id, username, firstName, lastName, email, password, phone, userStatus ) {
-    this.id = id; // int
+  constructor( username, firstName, lastName, email, password, phone, userStatus ) {
+    this.id = userID++; // int
     this.username = username; // string
     this.firstName = firstName; // string
     this.lastName = lastName; // string
@@ -93,8 +94,8 @@ var tag1 = new Tag( 0, "Rustfrit Stål" );
 
 
 var products = [ 
-	new Product( ("Pande" + nextPanID), 69.0, categoryPande, [], tag1, "In Store", 10 ),
-	new Product( ("Pande" + nextPanID), 420.69, categoryPande, [], tag1, "In Store", 4 ),
+	new Product( ("Pande" + nextPanID), 69.0, categoryPande, [], tag1, "in store", 10 ),
+	new Product( ("Pande" + nextPanID), 420.69, categoryPande, [], tag1, "in store", 4 ),
 ];
 
 var basket = [] // List<BasketItem>
@@ -123,7 +124,28 @@ var buttonFuncs = {
         },
         body: JSON.stringify({ id: 'lmfao' })
     } );
-  }
+  },
+
+  findByStatus: function( _status ) {
+    var url = new URL( '/product/findByStatus', 'http://localhost:3000/' );
+    url.searchParams.set( 'status', _status );
+    console.log( url );
+    fetch( url, {
+      method: 'GET',
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      }
+      // body: JSON.stringify({ status: _status })
+  } ).then( async function(response) {
+    if ( !response.ok ) return;
+    let json = await response.json();
+    console.log( json.result );
+    // console.log( 'Found: ' + JSON.parse( json ) );
+  }, function(reason) {
+    console.log( reason )
+  });
+  },
 
 };
 
@@ -139,7 +161,12 @@ router.get('/user', (req, res) => {
 })
 
 router.get('/product', (req, res) => {
-  res.render("product", { products: products, addToBasket: buttonFuncs.addToBasket, clickBtn: buttonFuncs.clickBtn } );
+  res.render("product", { 
+    products: products, 
+    addToBasket: buttonFuncs.addToBasket, 
+    clickBtn: buttonFuncs.clickBtn, 
+    findByStatus: buttonFuncs.findByStatus
+  } );
 })
 
 // Marcell Start:
@@ -157,6 +184,27 @@ router.get('/pots', (req, res) => {
 
 // Marcell Slut:
 
+
+router.get( '/product/findByStatus', (req, res) => {
+  console.log( req.query );
+  let pred;
+  if ( req.query.status === "in store" ) {
+    pred = (product) => product.status === "in store";
+  } else if ( req.query.status === "more on the way" ) {
+    pred = (product) => product.status === "more on the way";
+  } else if ( req.query.status === "sold out" ) {
+    pred = (product) => product.status === "sold out";
+  } else {
+    res.status(400).send( "Invalid status search, valid are 'in store', 'more on the way' or 'sold out'." );
+  }
+
+  var li = products.filter( pred, products );
+
+  console.log( li );
+
+  res.status(200).send( JSON.stringify( { result: li } ) );
+
+} );
 
 // Add a new product to the store.
 router.post('/product', (req, res) => {
@@ -237,9 +285,134 @@ router.get( '/basket', (req, res) => {
 } )
 
 // Nikolaj arbejder her //
+// Store calls
+function getStoreInventory(){
+  return basket;
+}
 
+var storeOrders = [] // list of orders
+function postStoreOrder(){
+  for( i = 0; i < storeOrders.length; i++)
+  storeOrders[i] = Order(basket, new Date, placed, false)
+}
 
+function getStoreOrder(id){
+  var found = false;
+  var i;
+  for ( i = 0; i < storeOrders.length; i++){
+    if( id == storeOrders[i].id){
+      found = true;
+      break;
+    }
+  }
+  if (found){
+    //push storeOrders[i];
+  }
+}
 
+function deleteStoreOrder(id){
+  var found = false;
+  var i;
+  for ( i = 0; i < storeOrders.length; i++){
+    if( id == storeOrders[i].id){
+      found = true;
+      break;
+    }
+  }
+  if(found){
+    storeOrders.splice[i,1];
+  }
+}
+
+// User calls
+router.post('/user', (req, res) => {
+  
+  console.log( req.body );
+  req.body.username
+  req.body.firstName
+  req.body.lastName
+  req.body.email
+  req.body.password
+  req.body.phone
+  req.body.userStatus 
+  users.push( new User(username, firstname, lastname, email, password, phone, userStatus) );
+  
+  console.log( user );
+  res.end()
+})
+function postCreatedUser(){
+  // push users[users.length-1]
+}
+function postAllUsers(){
+  // push users
+}
+
+var loginUser = []
+router.post('/***', (req,res) => {
+
+  console.log(req.body);
+  req.body.username
+  req.body.password
+  loginUser.push(username)
+  loginUser.push(password)
+})
+
+function userLogin(){
+  var found = false;
+  for(i = 0; i < users.length; i++){7
+    if( users[i].username == loginUser[0] && users[i].password == loginUser[1]){
+      found = true;
+      break;
+    }
+  }
+  loginUser.length = 0;
+  if(found){
+    // login user
+  }
+  
+}
+function userLogout(){
+  // logout user
+}
+function getUser(username){
+  var found = false;
+  var i;
+  for(i = 0; i < users.length; i++){
+    if(users[i].username == username){
+      found = true;
+      break;
+    }
+  }
+  if(found){
+    //push users[i]
+  }
+}
+function updateUserProfile(username){
+  var found = false;
+  var i;
+  for(i = 0; i < users.length; i++){
+    if(users[i].username == username){
+      found = true;
+      break;
+    }
+  }
+  if(found){
+    // change user
+  }
+}
+function deleteUser(username){
+  var found = false;
+  var i;
+  for(i = 0; i < users.length; i++){
+    if(users[i].username == username){
+      found = true;
+      break;
+    }
+  }
+  if(found){
+    users.splice(i,1)
+  }
+}
 // Til her
 
 
