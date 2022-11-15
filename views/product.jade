@@ -1,0 +1,64 @@
+extends layout
+
+block content
+    script.
+      function onButtonClick(){
+        //- console.log('#{title}')
+        fun = #{clickBtn}
+        fun()
+        //- console.log(val)
+      }
+      function onAddToBasketClick( id ) {
+        fun = #{addToBasket}
+        fun(id)
+      }
+    h1 Here you can add a Product to the store!
+    p Please insert the information about the product.
+    form( action="/product" method="post")
+      
+      label( for="productName" ) Enter the name of the product 
+      br
+      input#productName(type="text", name="productName")
+      br
+      br
+      label( for="productPrice" ) Enter the price for the product
+      br
+      input#productPrice(type="number", name="productPrice")
+      br
+      br
+      //- h3 Select Categories
+      input#productCategory(type="checkbox", name="isPan")
+
+      label( for="isPan") Pan
+      br
+      br
+      input#productCategory(type="checkbox", name="isPot")
+      label( for="isPot") Pot
+      br
+      br
+      label( for="productImagesFile" ) Images for the product from File
+      br
+      br
+      input#productImages(type="file", name="productImagesFile")
+      br
+      br
+      label( for="productImagesUrl" ) Images for the product from URL
+      br
+      br
+      input#productImages(type="url", name="productImagesUrl")
+      br
+      br
+      input#productInStore(type="number", name="productInventory")
+      label( for="productInStore" ) How much inventory do you have of this product
+      br
+      br
+      input(type="submit", value="Add Product")
+
+
+    button(onclick='onButtonClick()') Add Product
+    each product in products
+        h1= product.name
+        p kr #{product.price}
+        p quantity #{product.inventory}
+        button(onclick='onAddToBasketClick( #{product.id} )') Add to basket
+    

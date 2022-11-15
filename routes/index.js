@@ -1,5 +1,4 @@
 var express = require('express');
-const axios = require('axios').default;
 // axios.defaults.baseURL = 'localhost:/3000';
 var router = express.Router();
 var nextPanID = 0;
@@ -98,7 +97,35 @@ var products = [
 	new Product( ("Pande" + nextPanID), 420.69, categoryPande, [], tag1, "In Store", 4 ),
 ];
 
-var basket = [] // List<{ productID: int, quantity: int }
+var basket = [] // List<BasketItem>
+
+var buttonFuncs = {
+
+  addToBasket: function( pID ) {
+    fetch('/basket', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: pID })
+    })
+  },
+
+  clickBtn: function() {  // https://reqbin.com/code/javascript/wzp2hxwh/javascript-post-request-example
+    console.log( 'Hej' )
+    // axios.post( '/products', {} ); 
+    fetch('/product', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: 'lmfao' })
+    } );
+  }
+
+};
 
 
 /* GET home page. */
@@ -111,38 +138,31 @@ router.get('/users', (req, res) => {
   
 })
 
-router.get('/products', (req, res) => {
-  res.render("products", { products: products, addToBasket: function( pID ) {
-    fetch('/basket', {
-      method: 'POST',
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ id: pID })
-  })
-  }, clickBtn: function() {  //https://reqbin.com/code/javascript/wzp2hxwh/javascript-post-request-example
-    console.log( 'Hej' )
-    // axios.post( '/products', {} ); 
-    fetch('/products', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ id: 'lmfao' })
-    })
-    // .then(function(response) { response.json() }) // update her :-)
-    // .then(function(response) { console.log(JSON.stringify(response)) })
-  } } );
+router.get('/product', (req, res) => {
+  res.render("product", { products: products, addToBasket: buttonFuncs.addToBasket, clickBtn: buttonFuncs.clickBtn } );
 })
 
-router.post('/products', (req, res) => {
+// Add a new product to the store.
+router.post('/product', (req, res) => {
   
   console.log( req.body );
-  products.push( new Product( ("Pande" + nextPanID), 42.5, categoryPande, [], tag1, "In Store", 4 ) );
+  product = new Product( 
+    req.body.productName, 
+    req.body.productPrice, 
+    req.body.productCategory, 
+    req.body.photoUrls, 
+    req.body.tags, 
+    req.body.productInStore > 0 ? 'In Store' : "Not in store", 
+    req.body.productInventory
+  );
+
+  products.push( product );
+  // products.push( new Product( ("Pande" + nextPanID), 42.5, categoryPande, [], tag1, "In Store", 4 ) );
   console.log( products );
-  res.end()
+  
+  // Maybe add success
+  res.render("product", { products: products, addToBasket: buttonFuncs.addToBasket, clickBtn: buttonFuncs.clickBtn } );
+
 })
 
 router.post('/basket', (req, res) => {
@@ -158,9 +178,22 @@ router.post('/basket', (req, res) => {
   // console.log( products );
 })
 
+function constructBasket() {
+  var li = [];
+  for ( i = 0; i < basket.length; i++ ) {
+    li.push( { 
+      name: products.find( (product) => product.id == basket[i].productID ).name,
+      quantity: basket[i].quantity
+    } );
+    
+  }
+  return li;
+}
+
 function addItemToBasket( product ) {
   var found = false;
   var i;
+  console.log( basket.length )
   for ( i = 0; i < basket.length; i++ ) {
     if ( basket[i].productID == product.id ) {
       found = true;
@@ -174,26 +207,17 @@ function addItemToBasket( product ) {
     basket[i].quantity += 1;
     // console.log( basket.quantity[i] )
   } else {
-    basket.push( { productID: product.id, quantity: 1 } );
-    // basket.productId.push( product.id )
-    // basket.quantity.push( 1 )
+    basket.push( new BasketItem( product.id, 1 ) );
   }
   
 }
 
 router.get( '/basket', (req, res) => {
   console.log( "At basket :0" )
-  var li = [] // Product name, quantity
+  var li = constructBasket(); // Product name, quantity
 
-  for ( i = 0; i < basket.length; i++ ) {
-    li.push( BasketItem(
-      products.find( (product) => product.id == basket[i].productID ).name,
-      basket[i].quantity
-    ) );
-    
-  }
   console.log( li )
-  res.render( 'basket', { order: li })
+  res.render( 'basket', { order: li } );
 } )
 
 // Nikolaj arbejder her //
