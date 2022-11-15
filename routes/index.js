@@ -94,8 +94,8 @@ var tag1 = new Tag( 0, "Rustfrit Stål" );
 
 
 var products = [ 
-	new Product( ("Pande" + nextPanID), 69.0, categoryPande, [], tag1, "In Store", 10 ),
-	new Product( ("Pande" + nextPanID), 420.69, categoryPande, [], tag1, "In Store", 4 ),
+	new Product( ("Pande" + nextPanID), 69.0, categoryPande, [], tag1, "in store", 10 ),
+	new Product( ("Pande" + nextPanID), 420.69, categoryPande, [], tag1, "in store", 4 ),
 ];
 
 var basket = [] // List<BasketItem>
@@ -124,7 +124,28 @@ var buttonFuncs = {
         },
         body: JSON.stringify({ id: 'lmfao' })
     } );
-  }
+  },
+
+  findByStatus: function( _status ) {
+    var url = new URL( '/product/findByStatus', 'http://localhost:3000/' );
+    url.searchParams.set( 'status', _status );
+    console.log( url );
+    fetch( url, {
+      method: 'GET',
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      }
+      // body: JSON.stringify({ status: _status })
+  } ).then( async function(response) {
+    if ( !response.ok ) return;
+    let json = await response.json();
+    console.log( json.result );
+    // console.log( 'Found: ' + JSON.parse( json ) );
+  }, function(reason) {
+    console.log( reason )
+  });
+  },
 
 };
 
@@ -140,8 +161,34 @@ router.get('/user', (req, res) => {
 })
 
 router.get('/product', (req, res) => {
-  res.render("product", { products: products, addToBasket: buttonFuncs.addToBasket, clickBtn: buttonFuncs.clickBtn } );
+  res.render("product", { 
+    products: products, 
+    addToBasket: buttonFuncs.addToBasket, 
+    clickBtn: buttonFuncs.clickBtn, 
+    findByStatus: buttonFuncs.findByStatus
+  } );
 })
+
+router.get( '/product/findByStatus', (req, res) => {
+  console.log( req.query );
+  let pred;
+  if ( req.query.status === "in store" ) {
+    pred = (product) => product.status === "in store";
+  } else if ( req.query.status === "more on the way" ) {
+    pred = (product) => product.status === "more on the way";
+  } else if ( req.query.status === "sold out" ) {
+    pred = (product) => product.status === "sold out";
+  } else {
+    res.status(400).send( "Invalid status search, valid are 'in store', 'more on the way' or 'sold out'." );
+  }
+
+  var li = products.filter( pred, products );
+
+  console.log( li );
+
+  res.status(200).send( JSON.stringify( { result: li } ) );
+
+} );
 
 // Add a new product to the store.
 router.post('/product', (req, res) => {
