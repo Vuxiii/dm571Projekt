@@ -3,16 +3,19 @@ const axios = require('axios').default;
 // axios.defaults.baseURL = 'localhost:/3000';
 var router = express.Router();
 var nextPanID = 0;
+var nextOrderID = 0;
+
 class Order {
   constructor(id, productId, quantity, shipDate, status, complete ) {
-    this.id = id; // int
-    this.productId = productId; // list<int>
-    this.quantity = quantity; // list<int>
+    // this.id = id; // int
+    this.id = nextOrderID++;
+    // this.productId = productId; // list<int>
+    // this.quantity = quantity; // list<int>
+    this.products = []; // list<(id: int, quantity: int)
     this.shipDate = shipDate; // string
     this.status = status; // enum placed, approved, delivered
     this.complete = complete; // bool
   }
-  
 };
 
 class Customer {
@@ -88,7 +91,7 @@ var products = [
 	new Product( ("Pande" + nextPanID), 420.69, categoryPande, [], tag1, "In Store", 4 ),
 ];
 
-var basket = new Order(0, [], [], "unknown", "??", "??" );
+var basket = [] // List<{ productID: int, quantity: int }
 
 
 /* GET home page. */
@@ -151,8 +154,8 @@ router.post('/basket', (req, res) => {
 function addItemToBasket( product ) {
   var found = false;
   var i;
-  for ( i = 0; i < basket.productId.length; i++ ) {
-    if ( basket.productId[i] == product.id ) {
+  for ( i = 0; i < basket.length; i++ ) {
+    if ( basket[i].productID == product.id ) {
       found = true;
       break;
     }
@@ -160,12 +163,13 @@ function addItemToBasket( product ) {
   console.log( "I " + (found ? "found" : "did not find") + " the product in the basket.")
   console.log( "i is -> " + i );
   if ( found ) {
-    console.log( basket.quantity.at(i) )
-    basket.quantity[i] += 1;
-    console.log( basket.quantity[i] )
+    // console.log( basket[i].quantity )
+    basket[i].quantity += 1;
+    // console.log( basket.quantity[i] )
   } else {
-    basket.productId.push( product.id )
-    basket.quantity.push( 1 )
+    basket.push( { productID: product.id, quantity: 1 } );
+    // basket.productId.push( product.id )
+    // basket.quantity.push( 1 )
   }
   
 }
@@ -174,11 +178,11 @@ router.get( '/basket', (req, res) => {
   console.log( "At basket :0" )
   var li = [] // Product name, quantity
 
-  for ( i = 0; i < basket.productId.length; i++ ) {
+  for ( i = 0; i < basket.length; i++ ) {
     li.push( {
-      name: products.find( (product) => product.id == basket.productId[i] ).name,
-      quantity: basket.quantity[i]
-    })
+      name: products.find( (product) => product.id == basket[i].productID ).name,
+      quantity: basket[i].quantity
+    });
     
   }
   console.log( li )
