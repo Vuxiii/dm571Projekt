@@ -338,7 +338,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Order'
+              type: array
+              items:
+                $ref: '#/components/schemas/BasketItem'
           application/xml:
             schema:
               $ref: '#/components/schemas/Order'
