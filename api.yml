@@ -3,7 +3,7 @@ info:
   title: Inventory System Store - OpenAPI 3.0
   description:
     asdasd
-  version: 0.0.1
+  version: 1.0.1
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -26,7 +26,7 @@ tags:
   - name: user
     description: Operations about user
 paths:
-  /product:
+  /api/product:
     put:
       tags:
         - product
@@ -101,7 +101,7 @@ paths:
         - productstore_auth:
             - write:products
             - read:products
-  /product/findByStatus:
+  /api/product/findByStatus:
     get:
       tags:
         - product
@@ -116,11 +116,11 @@ paths:
           explode: true
           schema:
             type: string
-            default: available
+            default: in store
             enum:
-              - available
-              - pending
-              - sold
+              - in store
+              - more on the way
+              - sold out
       responses:
         '200':
           description: successful operation
@@ -141,7 +141,7 @@ paths:
         - productstore_auth:
             - write:products
             - read:products
-  /product/findByTags:
+  /api/product/findByTags:
     get:
       tags:
         - product
@@ -178,7 +178,7 @@ paths:
         - productstore_auth:
             - write:products
             - read:products
-  /product/{productId}:
+  /api/product/{productId}:
     get:
       tags:
         - product
@@ -270,7 +270,7 @@ paths:
         - productstore_auth:
             - write:products
             - read:products
-  /product/{productId}/uploadImage:
+  /api/product/{productId}/uploadImage:
     post:
       tags:
         - product
@@ -308,7 +308,7 @@ paths:
         - productstore_auth:
             - write:products
             - read:products
-  /store/inventory:
+  /api/store/inventory:
     get:
       tags:
         - store
@@ -327,7 +327,7 @@ paths:
                   format: int32
       security:
         - api_key: []
-  /store/order:
+  /api/store/order:
     post:
       tags:
         - store
@@ -356,7 +356,7 @@ paths:
                 $ref: '#/components/schemas/Order'
         '405':
           description: Invalid input
-  /store/order/{orderId}:
+  /api/store/order/{orderId}:
     get:
       tags:
         - store
@@ -404,7 +404,7 @@ paths:
           description: Invalid ID supplied
         '404':
           description: Order not found
-  /user:
+  /api/user:
     post:
       tags:
         - user
@@ -433,7 +433,7 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/User'
-  /user/createWithList:
+  /api/user/createWithList:
     post:
       tags:
         - user
@@ -459,7 +459,7 @@ paths:
                 $ref: '#/components/schemas/User'
         default:
           description: successful operation
-  /user/login:
+  /api/user/login:
     get:
       tags:
         - user
@@ -502,7 +502,7 @@ paths:
                 type: string
         '400':
           description: Invalid username/password supplied
-  /user/logout:
+  /api/user/logout:
     get:
       tags:
         - user
@@ -513,7 +513,7 @@ paths:
       responses:
         default:
           description: successful operation
-  /user/{username}:
+  /api/user/{username}:
     get:
       tags:
         - user
