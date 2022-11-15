@@ -11,12 +11,19 @@ class Order {
     this.id = nextOrderID++;
     // this.productId = productId; // list<int>
     // this.quantity = quantity; // list<int>
-    this.products = []; // list<(id: int, quantity: int)
+    this.products = []; // list<BasketItem>
     this.shipDate = shipDate; // string
     this.status = status; // enum placed, approved, delivered
     this.complete = complete; // bool
   }
 };
+
+class BasketItem {
+  constructor( productID, quantity ) {
+    this.productID = productID;
+    this.quantity = quantity;
+  }
+}
 
 class Customer {
   constructor( id, username, address ) {
@@ -179,15 +186,21 @@ router.get( '/basket', (req, res) => {
   var li = [] // Product name, quantity
 
   for ( i = 0; i < basket.length; i++ ) {
-    li.push( {
-      name: products.find( (product) => product.id == basket[i].productID ).name,
-      quantity: basket[i].quantity
-    });
+    li.push( BasketItem(
+      products.find( (product) => product.id == basket[i].productID ).name,
+      basket[i].quantity
+    ) );
     
   }
   console.log( li )
   res.render( 'basket', { order: li })
 } )
+
+// Nikolaj arbejder her //
+
+
+
+// Til her
 
 
 module.exports = router;
