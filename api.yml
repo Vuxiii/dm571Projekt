@@ -594,14 +594,22 @@ components:
           type: integer
           format: int64
           example: 10
-        productId:
-          type: integer
-          format: int64
-          example: 198772
-        quantity:
-          type: integer
-          format: int32
-          example: 7
+        products:
+          type: array
+          xml:
+            name: products
+            wrapped: true
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int32
+                example: 24
+              quantity:
+                type: integer
+                format: int32
+                example: 12
         shipDate:
           type: string
           format: date-time
