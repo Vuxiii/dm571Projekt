@@ -1,0 +1,33 @@
+block variables
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    link(rel="shortcut icon", href="/favicon.ico")
+    meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    meta(name="theme-color", content="#000000")
+    // .title #{title}
+    link(rel="stylesheet", href="/style.css")
+  body
+    include navbar.pug
+    // div#title
+      div#root
+    div#roots
+        block layout-content
+        div.view
+          div.mview
+            a.button.seleected(href="/") HOME 
+            a.button(href="/user") PANS 
+            a.button(href="/pots") POTS 
+            a.button(href="/userprofile") USER 
+            p .
+          
+        div.myView.myPic 
+          p . 
+          p , 
+          p , 
+  // block hello
+    p Hello from Block hello
+
+        .p under? 
+        a.button(href="/user") PANS 
