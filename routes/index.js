@@ -130,6 +130,9 @@ var buttonFuncs = {
   findByStatus: function( _status ) {
     var url = new URL( '/product/findByStatus', 'http://localhost:3000/' );
     url.searchParams.set( 'status', _status );
+    
+    return url;
+    /* 
     console.log( url );
     fetch( url, {
       method: 'GET',
@@ -146,6 +149,7 @@ var buttonFuncs = {
   }, function(reason) {
     // console.log( reason )
   });
+  */
   },
 
 };
@@ -194,7 +198,7 @@ router.get( '/product/findByStatus', (req, res) => {
   let li = findByStatus( req.query );
   if ( li === undefined ) li = [];
   
-  res.render("index", { 
+  res.render("product", { 
     products: products, 
     filteredProducts: li,
     addToBasket: buttonFuncs.addToBasket, 
@@ -234,6 +238,23 @@ function findByStatus( query ) {
 
   return li;
 }
+// Marcell Start:
+router.get('/pans', (req, res) => {
+  res.render("pans", { users: users } );
+  
+})
+
+router.get('/pots', (req, res) => {
+  res.render("pots", { users: users } );
+  
+})
+router.get('/userprofile', (req, res) => {
+  res.render("userprofile", { users: users } );
+  
+})
+
+
+// Marcell Slut:
 
 
 // Add a new product to the store.
