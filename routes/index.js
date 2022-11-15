@@ -229,7 +229,10 @@ router.get('/pots', (req, res) => {
   res.render("pots", { users: users } );
   
 })
-
+router.get('/userprofile', (req, res) => {
+  res.render("userprofile", { users: users } );
+  
+})
 
 
 // Marcell Slut:
