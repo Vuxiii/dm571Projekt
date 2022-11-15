@@ -98,12 +98,14 @@ var products = [
 	new Product( ("Pande" + nextPanID), 420.69, categoryPande, [], tag1, "in store", 4 ),
 ];
 
+// var filteredProducts = [];
+
 var basket = [] // List<BasketItem>
 
 var buttonFuncs = {
 
   addToBasket: function( pID ) {
-    fetch('/basket', {
+    fetch('/api/basket', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -114,9 +116,8 @@ var buttonFuncs = {
   },
 
   clickBtn: function() {  // https://reqbin.com/code/javascript/wzp2hxwh/javascript-post-request-example
-    console.log( 'Hej' )
-    // axios.post( '/products', {} ); 
-    fetch('/product', {
+    console.log( 'Hej' ) 
+    fetch('/api/product', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -138,12 +139,12 @@ var buttonFuncs = {
       }
       // body: JSON.stringify({ status: _status })
   } ).then( async function(response) {
-    if ( !response.ok ) return;
-    let json = await response.json();
-    console.log( json.result );
+    // if ( !response.ok ) return;
+    // let json = await response.json();
+    // console.log( json.result );
     // console.log( 'Found: ' + JSON.parse( json ) );
   }, function(reason) {
-    console.log( reason )
+    // console.log( reason )
   });
   },
 
@@ -163,6 +164,7 @@ router.get('/user', (req, res) => {
 router.get('/product', (req, res) => {
   res.render("product", { 
     products: products, 
+    filteredProducts: [],
     addToBasket: buttonFuncs.addToBasket, 
     clickBtn: buttonFuncs.clickBtn, 
     findByStatus: buttonFuncs.findByStatus
@@ -170,28 +172,53 @@ router.get('/product', (req, res) => {
 })
 
 router.get( '/product/findByStatus', (req, res) => {
-  console.log( req.query );
+  let li = findByStatus( req.query );
+  if ( li === undefined ) li = [];
+  
+  res.render("index", { 
+    products: products, 
+    filteredProducts: li,
+    addToBasket: buttonFuncs.addToBasket, 
+    clickBtn: buttonFuncs.clickBtn, 
+    findByStatus: buttonFuncs.findByStatus
+  } );
+
+} );
+
+router.get( '/api/product/findByStatus', (req, res) => {
+  let li = findByStatus( req.query );
+
+  if ( li )
+    res.status(200).send( JSON.stringify( { result: li } ) );
+  
+  res.status(400).send( "Invalid status search, valid are 'in store', 'more on the way' or 'sold out'." );
+
+} );
+
+function findByStatus( query ) {
+  console.log( query );
   let pred;
-  if ( req.query.status === "in store" ) {
+  if ( query.status === "in store" ) {
     pred = (product) => product.status === "in store";
-  } else if ( req.query.status === "more on the way" ) {
+  } else if ( query.status === "more on the way" ) {
     pred = (product) => product.status === "more on the way";
-  } else if ( req.query.status === "sold out" ) {
+  } else if ( query.status === "sold out" ) {
     pred = (product) => product.status === "sold out";
   } else {
-    res.status(400).send( "Invalid status search, valid are 'in store', 'more on the way' or 'sold out'." );
+    return undefined
+    // res.status(400).send( "Invalid status search, valid are 'in store', 'more on the way' or 'sold out'." );
   }
 
   var li = products.filter( pred, products );
 
   console.log( li );
 
-  res.status(200).send( JSON.stringify( { result: li } ) );
+  return li;
+}
 
-} );
 
 // Add a new product to the store.
-router.post('/product', (req, res) => {
+router.post('/api/product', (req, res) => {
   
   console.log( req.body );
   product = new Product( 
@@ -213,7 +240,7 @@ router.post('/product', (req, res) => {
 
 })
 
-router.post('/basket', (req, res) => {
+router.post('/api/basket', (req, res) => {
   console.log( req.body.id );
   // product = ;
 

@@ -1,7 +1,9 @@
 extends layout
 
 block layout-content
+    
     script.
+      
       function onButtonClick(){
         //- console.log('#{title}')
         fun = #{clickBtn}
@@ -64,10 +66,17 @@ block layout-content
     br
     br
     h1 Retrieve products by status
-
+    
     button(onclick='onFindByStatus( `in store` )') in store
     button(onclick='onFindByStatus( `more on the way` )') more on the way
     button(onclick='onFindByStatus( `sold out` )') sold out
+
+    h2 Filter Result
+
+    each product in filteredProducts
+      h3= product.name
+
+    h2 End Filter
 
     br
     br
@@ -79,5 +88,5 @@ block layout-content
         h1= product.name
         p kr #{product.price}
         p quantity #{product.inventory}
-        button(onclick='onAddToBasketClick( #{product.id} )') Add to basket
+        button(onclick='onAddToBasketClick( ' + product.id + ' )') Add to basket
     
