@@ -7,27 +7,20 @@ html
     meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
     meta(name="theme-color", content="#000000")
     // .title #{title}
-    link(rel="stylesheet", href="/style.css")
+    link(rel="stylesheet", href="/stylesheets/style.css")
   body
     include navbar.pug
-    // div#title
-      div#root
-    div#roots
-        block layout-content
-        div.view
-          div.mview
-            a.button.seleected(href="/") HOME 
-            a.button(href="/user") PANS 
-            a.button(href="/pots") POTS 
-            a.button(href="/userprofile") USER 
-            p .
+    block layout-content
+  //-   // div#title
+  //-     div#root
+    
           
-        div.myView.myPic 
-          p . 
-          p , 
-          p , 
-  // block hello
-    p Hello from Block hello
+  //-       div.myView.myPic 
+  //-         p . 
+  //-         p , 
+  //-         p , 
+  //- // block hello
+  //-   p Hello from Block hello
 
-        .p under? 
-        a.button(href="/user") PANS 
+  //-       .p under? 
+  //-       a.button(href="/user") PANS 

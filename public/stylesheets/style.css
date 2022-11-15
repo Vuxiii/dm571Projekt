@@ -14,7 +14,7 @@
 html,
 body,
 #root {
-  height: 100%;
+  /* height: 100%; */
   width: 100%;
 }
 
@@ -194,11 +194,11 @@ button{
 }
 
 .myPic{
-  background: url("fried-rice.jpg") left bottom;
+  background: url("/images/fried-rice.jpg") left bottom;
   background-size: cover;
 }
 .myPot{
-  background: url("ranPot.jpeg") left bottom;
+  background: url("/images/ranPot.jpeg") left bottom;
   background-size: cover;
 }
 
