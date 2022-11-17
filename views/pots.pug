@@ -1,19 +1,36 @@
 extends layout
 
 block layout-content
-  div.center
-    // Make Loops With products
-    img.picView(src='/images/ranPot4.jpg' alt='pots' style='width:100px; height:100px;')
-    img.picView(src='/images/ranPot4.jpg' alt='pots' style='width:100px; height:100px;')
-    img.picView(src='/images/ranPot4.jpg' alt='pots' style='width:100px; height:100px;')
-    img.picView(src='/images/ranPot4.jpg' alt='pots' style='width:100px; height:100px;')
-  div.center
-    img.picView(src='/images/ranPot4.jpg' alt='pots' style='width:100px; height:100px;')
-    img.picView(src='/images/ranPot4.jpg' alt='pots' style='width:100px; height:100px;')
-    img.picView(src='/images/ranPot4.jpg' alt='pots' style='width:100px; height:100px;')
-    img.picView(src='/images/ranPot4.jpg' alt='pots' style='width:100px; height:100px;')
-  div.center
-    img.picView(src='/images/ranPot4.jpg' alt='pots' style='width:100px; height:100px;')
-    img.picView(src='/images/ranPot4.jpg' alt='pots' style='width:100px; height:100px;')
-    img.picView(src='/images/ranPot4.jpg' alt='pots' style='width:100px; height:100px;')
-    img.picView(src='/images/ranPot4.jpg' alt='pots' style='width:100px; height:100px;')
+  script.
+      function onAddToBasketClick( id ) {
+        fun = #{addToBasket}
+        fun(id)
+      }
+  div.divForheader
+    div.center
+      - var n = 0;
+        while n < 4 
+          .imageClass
+            p image txt
+            img.picView(src='/images/fried-rice.jpg' alt='login' style='width:120px; height:120px;')
+            .center
+              button.basketB(onclick='onAddToBasketClick( #{product.id} )') Add to basket
+          - ++n
+    div.center
+       - var n = 0;
+        while n < 4 
+          .imageClass
+            p image txt
+            img.picView(src='/images/fried-rice.jpg' alt='login' style='width:120px; height:120px;')
+            .center
+              button.basketB(onclick='onAddToBasketClick( #{product.id} )') Add to basket
+          - ++n
+    div.center
+       - var n = 0;
+        while n < 4 
+          .imageClass
+            p image txt
+            img.picView(src='/images/fried-rice.jpg' alt='login' style='width:120px; height:120px;')
+            .center
+              button.basketB(onclick='onAddToBasketClick( #{product.id} )') Add to basket
+          - ++n

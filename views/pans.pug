@@ -1,5 +1,20 @@
 extends layout
 block layout-content
+  script.
+      function onButtonClick(){
+        //- console.log('#{title}')
+        fun = #{clickBtn}
+        fun()
+        //- console.log(val)
+      }
+      function onAddToBasketClick( id ) {
+        fun = #{addToBasket}
+        fun(id)
+      }
+      function onFindByStatus( status ) {
+        fun = #{findByStatus}
+        fun(status)
+      }
   div.center
     // Make Loops With products from database
     .imageClass

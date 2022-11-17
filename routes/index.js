@@ -94,10 +94,25 @@ var tag1 = new Tag( 0, "Rustfrit Stål" );
 
 
 var products = [ 
-	new Product( ("Pande" + nextPanID), 69.0, categoryPande, [], tag1, "in store", 10 ),
-	new Product( ("Pande" + nextPanID), 420.69, categoryPande, [], tag1, "in store", 4 ),
+  [ 
+	  new Product( ("Pande" + nextPanID), 1, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 10 ),
+	  new Product( ("Pande" + nextPanID), 2, categoryPande, [], tag1, "in store", 4 ),
+	  new Product( ("Pande" + nextPanID), 3, categoryPande, [], tag1, "in store", 4 ),
+	  new Product( ("Pande" + nextPanID), 4, categoryPande, [], tag1, "in store", 4 ),
+  ],
+  [ 
+	  new Product( ("Pande" + nextPanID), 5, categoryPande, [], tag1, "in store", 10 ),
+	  new Product( ("Pande" + nextPanID), 6, categoryPande, [], tag1, "in store", 4 ),
+	  new Product( ("Pande" + nextPanID), 7, categoryPande, [], tag1, "in store", 4 ),
+	  new Product( ("Pande" + nextPanID), 8, categoryPande, [], tag1, "in store", 4 ),
+  ],
+  [ 
+	  new Product( ("Pande" + nextPanID), 9, categoryPande, [], tag1, "in store", 10 ),
+	  new Product( ("Pande" + nextPanID), 10, categoryPande, [], tag1, "in store", 4 ),
+	  new Product( ("Pande" + nextPanID), 11, categoryPande, [], tag1, "in store", 4 ),
+	  new Product( ("Pande" + nextPanID), 12, categoryPande, [], tag1, "in store", 4 ),
+  ]
 ];
-
 // var filteredProducts = [];
 
 var basket = [] // List<BasketItem>
@@ -175,11 +190,38 @@ router.get('/product', (req, res) => {
   } );
 })
 
-// Marcell Start:
-router.get('/pans', (req, res) => {
-  res.render("pans", { users: users } );
-  
+// Marcell START
+router.get('/marcellsTest', (req, res) => {
+  res.render("marcellsTest", { 
+    products: products, 
+    filteredProducts: [],
+    addToBasket: buttonFuncs.addToBasket, 
+    clickBtn: buttonFuncs.clickBtn, 
+    findByStatus: buttonFuncs.findByStatus
+  } );
 })
+
+router.get('/pots', (req, res) => {
+  res.render("pots", { 
+    products: products, 
+    filteredProducts: [],
+    addToBasket: buttonFuncs.addToBasket, 
+    clickBtn: buttonFuncs.clickBtn, 
+    findByStatus: buttonFuncs.findByStatus
+  } );
+})
+
+router.get('/pans', (req, res) => {
+  res.render("pans", { 
+    products: products, 
+    filteredProducts: [],
+    addToBasket: buttonFuncs.addToBasket, 
+    clickBtn: buttonFuncs.clickBtn, 
+    findByStatus: buttonFuncs.findByStatus
+  } );
+})
+
+// Marcell END
 
 router.get('/pots', (req, res) => {
   res.render("pots", { users: users } );
@@ -189,10 +231,6 @@ router.get('/userprofile', (req, res) => {
   res.render("userprofile", { users: users } );
   
 })
-
-
-// Marcell Slut:
-
 
 router.get( '/product/findByStatus', (req, res) => {
   let li = findByStatus( req.query );
@@ -238,7 +276,6 @@ function findByStatus( query ) {
 
   return li;
 }
-// Marcell Start:
 router.get('/pans', (req, res) => {
   res.render("pans", { users: users } );
   
@@ -252,9 +289,6 @@ router.get('/userprofile', (req, res) => {
   res.render("userprofile", { users: users } );
   
 })
-
-
-// Marcell Slut:
 
 
 // Add a new product to the store.
@@ -285,10 +319,17 @@ router.post('/api/basket', (req, res) => {
   // product = ;
 
   // product.inventory--;
-  var p = products.find( (product) => product.id === req.body.id );
-  console.log( p )
+  var p; 
+  //for(list in products){
+  for ( i = 0; i < products.length; i++){
+    list=products[i];
+    p = list.find( (product) => product.id === req.body.id );
+    console.log( p )
+    if(p)
+      break;
+  }
   addItemToBasket( p )
-
+  
   // products.push( new Product( ("Pande" + nextPanID), 42.5, categoryPande, [], tag1, "In Store", 4 ) );
   // console.log( products );
 })
@@ -322,7 +363,9 @@ function addItemToBasket( product ) {
     basket[i].quantity += 1;
     // console.log( basket.quantity[i] )
   } else {
+    console.log("hej " + product)
     basket.push( new BasketItem( product.id, 1 ) );
+    console.log("asdfasdfasdf")
   }
   
 }
