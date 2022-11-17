@@ -63,14 +63,10 @@ a {
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-
   height: 100%;
   width: 100%;
-
   padding: 20px;
-
   background-size: cover;
-
   font-family: "Merriweather Sans", sans-serif;
 }
 
@@ -220,19 +216,31 @@ button{
 }
 
 .picView {
-  margin-right: 30px;
+  margin-right: 20px;
   align-items: center;
   align-items: center;
   text-align: center;
   position: relative;
-  margin-bottom: -20px;
+  margin-bottom: -60px;
+  /* margin-top: 20px; */ 
 }
 
 /* Marcell Start */
 
 .imageClass{
   margin-bottom: 10px;
+  margin-top: 100px;
+
+}
+
+.basketB{
   margin-top: 10px;
+  margin-bottom: 50px;
+  padding: 10px 10px;
+}
+
+.divForheader{
+  margin-top: 100px;
 
 }
 
@@ -251,8 +259,8 @@ button{
   justify-content: center;
   align-items: center;
   height: 120px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 50px;
+  margin-bottom: 100px;
 }
 .button:selected{
   background-color: black;

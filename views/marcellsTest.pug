@@ -1,0 +1,37 @@
+extends layout
+
+block layout-content
+    
+    script.
+      
+      function onAddToBasketClick( id ) {
+        fun = #{addToBasket}
+        fun(id)
+      }
+    h2 Filter Result
+    // button(onclick='onButtonClick()') Add Product
+    // - var n = 0
+    // each product in products
+    //     - ++n 
+    //     h1= product.name
+    //     .center
+    //       button(onclick='onAddToBasketClick( ' + product.id + ' )') Add to basket
+    //       p asdasd
+    //       if n == 3
+    //         p hello from 3
+    - var n = 0
+    // each product in products
+    //   div.center
+    //     each product2 in product
+    //         h1= product2.name
+    //         button(onclick='onAddToBasketClick( ' + product2.id + ' )') Add to basket
+    each list in products
+      div.center
+        each product in list
+          div.center
+            .center
+              h1= product.name
+              p= product.id
+              img.picView(src= ('`' + product.photoUrls + '`') alt='login' style='width:100px; height:100px;')
+            button(onclick='onAddToBasketClick( ' + product.id + ' )') Add to basket
+      
