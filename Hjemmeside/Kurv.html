@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Kurv</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <style>
+
+
+        </style>
+
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="#!">Inutilia Emptio</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="Hjem.html">Hjem</a></li>
+                        <li class="nav-item"><a class="nav-link" href="Produkter.html">Produkter</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#!">All Products</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+                                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex" action="Kurv.html">
+                        <button class="btn btn-outline-dark" type="submit">
+                            <i class="bi-cart-fill me-1"></i>
+                            Kurv
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Kurv</h1>
+                <p class="lead fw-normal text-white-50 mb-0">Eksperter siden mange år siden</p>
+            </div>
+        </header>
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container">
+                <div class="row w-100">
+                    <div class="col-lg-12 col-md-12 col-12">
+                        <table id="shoppingCart" class="table table-condensed table-responsive">
+                            <thead>
+                                <tr>
+                                    <th style="width:60%">Produkt</th>
+                                    <th style="width:12%">Pris</th>
+                                    <th style="width:10%">Antal</th>
+                                    <th style="width:16%"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td data-th="Produkt">
+                                        <div class="row">
+                                            <div class="col-md-3 text-left">
+                                                <img src="https://via.placeholder.com/250x250/5fa9f8/ffffff" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                            </div>
+                                            <div class="col-md-9 text-left mt-sm-2">
+                                                <h4>Product Name</h4>
+                                                <p class="font-weight-light">Brand &amp; Name</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td data-th="Pris">$49.00</td>
+                                    <td data-th="Antal">
+                                        <input type="number" class="form-control form-control-lg text-center" value="1">
+                                    </td>
+                                    <td class="actions" data-th="">
+                                        <div class="text-right">
+                                            <button class="btn btn-white border-secondary bg-white btn-md mb-2">
+                                                <i class="fas fa-sync"></i>
+                                            </button>
+                                            <button class="btn btn-white border-secondary bg-white btn-md mb-2">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-th="Produkt">
+                                        <div class="row">
+                                            <div class="col-md-3 text-left">
+                                                <img src="https://via.placeholder.com/250x250/5fa9f8/ffffff" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                            </div>
+                                            <div class="col-md-9 text-left mt-sm-2">
+                                                <h4>Product Name</h4>
+                                                <p class="font-weight-light">Brand &amp; Name</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td data-th="Pris">$49.00</td>
+                                    <td data-th="Antal">
+                                        <input type="number" class="form-control form-control-lg text-center" value="1">
+                                    </td>
+                                    <td class="actions" data-th="">
+                                        <div class="text-right">
+                                            <button class="btn btn-white border-secondary bg-white btn-md mb-2">
+                                                <i class="fas fa-sync"></i>
+                                            </button>
+                                            <button class="btn btn-white border-secondary bg-white btn-md mb-2">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-th="Produkt">
+                                        <div class="row">
+                                            <div class="col-md-3 text-left">
+                                                <img src="https://via.placeholder.com/250x250/5fa9f8/ffffff" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                            </div>
+                                            <div class="col-md-9 text-left mt-sm-2">
+                                                <h4>Product Name</h4>
+                                                <p class="font-weight-light">Brand &amp; Name</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td data-th="Pris">$49.00</td>
+                                    <td data-th="Antal">
+                                        <input type="number" class="form-control form-control-lg text-center" value="1">
+                                    </td>
+                                    <td class="actions" data-th="">
+                                        <div class="text-right">
+                                            <button class="btn btn-white border-secondary bg-white btn-md mb-2">
+                                                <i class="fas fa-sync"></i>
+                                            </button>
+                                            <button class="btn btn-white border-secondary bg-white btn-md mb-2">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="float-right text-right">
+                            <h4>Total:</h4>
+                            <h1>1000 kr.</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4 d-flex align-items-center">
+                    <div class="col-sm-6 order-md-2 text-right">
+                        <!--<a href="catalog.html" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Checkout</a>-->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            Launch static backdrop modal
+                          </button>
+                          
+                    </div>
+                    <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
+                        <a href="Produkter.html">
+                            <i class="fas fa-arrow-left mr-2"></i>Bliv ved med at shoppe</a>
+                    </div>
+                </div>
+            </div>
+
+
+            
+              <!-- Modal -->
+              <div class="modal modal-dialog-scrollable fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Er du sikker på at du har alt?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Gå tilbage</button>
+                      <button type="button" class="btn btn-primary">Jeg har alt</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+        </section>
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
