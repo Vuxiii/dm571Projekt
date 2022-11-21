@@ -18,7 +18,8 @@ block layout-content
         
          
         fun = #{findByStatus}
-        
+        //- fun( status )
+        //- window.location.reload()
         window.location.href = fun(status).toString()
       }
 
@@ -46,7 +47,7 @@ block layout-content
       input#productCategory(type="checkbox", name="isPot")
       label( for="isPot") Pot
       br
-      br
+      bronFindByStatus
       label( for="productImagesFile" ) Images for the product from File
       br
       br
