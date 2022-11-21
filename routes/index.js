@@ -96,6 +96,7 @@ var tag1 = new Tag( 0, "Rustfrit Stål" );
 var products = [ 
 	new Product( ("Pande" + nextPanID), 69.0, categoryPande, [], tag1, "in store", 10 ),
 	new Product( ("Pande" + nextPanID), 420.69, categoryPande, [], tag1, "in store", 4 ),
+	new Product( ("Pande" + nextPanID), 420.69, categoryPande, [], tag1, "in store", 4 ),
 ];
 
 // var filteredProducts = [];
@@ -128,8 +129,16 @@ var buttonFuncs = {
   },
 
   findByStatus: function( _status ) {
-    var url = new URL( '/product/findByStatus', 'http://localhost:3000/' );
-    url.searchParams.set( 'status', _status );
+  //   fetch('/product/' + _status, {
+  //     method: 'GET',
+  //     headers: {
+  //         'Accept': 'application/json',
+  //         'Content-Type': 'application/json'
+  //     }
+  // } );
+    
+    var url = new URL( '/product/' + _status, 'http://localhost:3000/' );
+    // url.searchParams.set( 'status', _status );
     
     return url;
     /* 
@@ -194,10 +203,11 @@ router.get('/userprofile', (req, res) => {
 // Marcell Slut:
 
 
-router.get( '/product/findByStatus', (req, res) => {
-  let li = findByStatus( req.query );
+router.get( '/product/:findByStatus', (req, res) => {
+  console.log("I WAS CALLED")
+  let li = findByStatus( { status: req.params.findByStatus } );
   if ( li === undefined ) li = [];
-  
+  console.log(li)
   res.render("product", { 
     products: products, 
     filteredProducts: li,
@@ -208,8 +218,9 @@ router.get( '/product/findByStatus', (req, res) => {
 
 } );
 
-router.get( '/api/product/findByStatus', (req, res) => {
-  let li = findByStatus( req.query );
+router.get( '/api/product/:findByStatus', (req, res) => {
+  
+  let li = findByStatus( { status: req.params.findByStatus } );
 
   if ( li )
     res.status(200).send( JSON.stringify( { result: li } ) );
@@ -219,7 +230,6 @@ router.get( '/api/product/findByStatus', (req, res) => {
 } );
 
 function findByStatus( query ) {
-  console.log( query );
   let pred;
   if ( query.status === "in store" ) {
     pred = (product) => product.status === "in store";
