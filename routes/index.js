@@ -96,42 +96,42 @@ var tag1 = new Tag( 0, "Rustfrit Stål" );
 var products = [ 
   [ 
 	  new Product( ("Pande" + nextPanID), 1, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 10 ),
-	  new Product( ("Pande" + nextPanID), 2, categoryPande, [], tag1, "in store", 4 ),
-	  new Product( ("Pande" + nextPanID), 3, categoryPande, [], tag1, "in store", 4 ),
-	  new Product( ("Pande" + nextPanID), 4, categoryPande, [], tag1, "in store", 4 ),
+	  new Product( ("Pande" + nextPanID), 2, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 4 ),
+	  new Product( ("Pande" + nextPanID), 3, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 4 ),
+	  new Product( ("Pande" + nextPanID), 4, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 4 ),
   ],
   [ 
-	  new Product( ("Pande" + nextPanID), 5, categoryPande, [], tag1, "in store", 10 ),
-	  new Product( ("Pande" + nextPanID), 6, categoryPande, [], tag1, "in store", 4 ),
-	  new Product( ("Pande" + nextPanID), 7, categoryPande, [], tag1, "in store", 4 ),
-	  new Product( ("Pande" + nextPanID), 8, categoryPande, [], tag1, "in store", 4 ),
+	  new Product( ("Pande" + nextPanID), 5, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 10 ),
+	  new Product( ("Pande" + nextPanID), 6, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 4 ),
+	  new Product( ("Pande" + nextPanID), 7, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 4 ),
+	  new Product( ("Pande" + nextPanID), 8, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 4 ),
   ],
   [ 
-	  new Product( ("Pande" + nextPanID), 9, categoryPande, [], tag1, "in store", 10 ),
-	  new Product( ("Pande" + nextPanID), 10, categoryPande, [], tag1, "in store", 4 ),
-	  new Product( ("Pande" + nextPanID), 11, categoryPande, [], tag1, "in store", 4 ),
-	  new Product( ("Pande" + nextPanID), 12, categoryPande, [], tag1, "in store", 4 ),
+	  new Product( ("Pande" + nextPanID), 9, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 10 ),
+	  new Product( ("Pande" + nextPanID), 10, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 4 ),
+	  new Product( ("Pande" + nextPanID), 11, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 4 ),
+	  new Product( ("Pande" + nextPanID), 12, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 4 ),
   ]
 ];
 
 var productsPot = [ 
   [ 
 	  new Product( ("Pots" + nextPanID), 1, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 10 ),
-	  new Product( ("Pots" + nextPanID), 2, categoryPande, [], tag1, "in store", 4 ),
-	  new Product( ("Pots" + nextPanID), 3, categoryPande, [], tag1, "in store", 4 ),
-	  new Product( ("Pots" + nextPanID), 4, categoryPande, [], tag1, "in store", 4 ),
+	  new Product( ("Pots" + nextPanID), 2, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 4 ),
+	  new Product( ("Pots" + nextPanID), 3, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 4 ),
+	  new Product( ("Pots" + nextPanID), 4, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 4 ),
   ],
   [ 
-	  new Product( ("Pots" + nextPanID), 5, categoryPande, [], tag1, "in store", 10 ),
-	  new Product( ("Pots" + nextPanID), 6, categoryPande, [], tag1, "in store", 4 ),
-	  new Product( ("Pots" + nextPanID), 7, categoryPande, [], tag1, "in store", 4 ),
-	  new Product( ("Pots" + nextPanID), 8, categoryPande, [], tag1, "in store", 4 ),
+	  new Product( ("Pots" + nextPanID), 5, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 10 ),
+	  new Product( ("Pots" + nextPanID), 6, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 4 ),
+	  new Product( ("Pots" + nextPanID), 7, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 4 ),
+	  new Product( ("Pots" + nextPanID), 8, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 4 ),
   ],
   [ 
-	  new Product( ("Pots" + nextPanID), 9, categoryPande, [], tag1, "in store", 10 ),
-	  new Product( ("Pots" + nextPanID), 10, categoryPande, [], tag1, "in store", 4 ),
-	  new Product( ("Pots" + nextPanID), 11, categoryPande, [], tag1, "in store", 4 ),
-	  new Product( ("Pots" + nextPanID), 12, categoryPande, [], tag1, "in store", 4 ),
+	  new Product( ("Pots" + nextPanID), 9, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 10 ),
+	  new Product( ("Pots" + nextPanID), 10, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 4 ),
+	  new Product( ("Pots" + nextPanID), 11, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 4 ),
+	  new Product( ("Pots" + nextPanID), 12, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 4 ),
   ]
 ];
 
@@ -192,7 +192,7 @@ var buttonFuncs = {
 
 };
 
-
+/* GETTERS */ 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -213,7 +213,6 @@ router.get('/product', (req, res) => {
   } );
 })
 
-// Marcell START
 router.get('/marcellsTest', (req, res) => {
   res.render("marcellsTest", { 
     products: products, 
@@ -522,11 +521,5 @@ function deleteUser(username){
     users.splice(i,1)
   }
 }
-// Til her
-router.get('/antonTest', (req, res) => {
-  res.render("antonTest", { users: users } );
-  
-})
-
 
 module.exports = router;

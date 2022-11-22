@@ -29,7 +29,8 @@ block layout-content
               // h1= product.name
               // p= product.id
               - const p = product.photoUrls
-              img.picView(src= product.photoUrls alt='login' style='width:100px; height:100px;')
+              console.log( p )
+              img.picView(src= "p".replace("p", product.photoUrls)  alt='login' style='width:100px; height:100px;')
               // img.picView(src='/images/fried-rice.jpg' alt='login' style='width:120px; height:120px;')
               .center
                 button.basketB(onclick='onAddToBasketClick( ' + product.id + ' )') Add to basket

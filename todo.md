@@ -9,3 +9,9 @@
 
 - Lave login:
     - Hvor, hvis admin er logget in, kommer der en admin side? 
+
+
+Backlog:
+    - Putte images direkte ind i produkterne ved creation       [+]
+    - Basket: iconet: Skal signalere, hvor mange der er i 
+    - Basket produkter: Skal vise billede.

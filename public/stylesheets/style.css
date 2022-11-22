@@ -286,3 +286,7 @@ button{
   background-color: black;
   color: white;
 }
+
+.basketCounter{
+  color: red;
+}
