@@ -259,6 +259,8 @@ router.get('/pans', (req, res) => {
 
 // Marcell END
 
+// Marcell END
+
 router.get('/pots', (req, res) => {
   res.render("pots", { users: users } );
   
