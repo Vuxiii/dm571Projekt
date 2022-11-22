@@ -213,7 +213,7 @@ router.get('/user', (req, res) => {
 
 router.get('/product', (req, res) => {
   res.render("product", { 
-    basketLength: basket.length, 
+    bbasket: basket.length, 
     products: products, 
     filteredProducts: [],
     addToBasket: buttonFuncs.addToBasket, 
@@ -244,6 +244,7 @@ router.get('/pots', (req, res) => {
 
 router.get('/pans', (req, res) => {
   res.render("pans", { 
+    bbasket: basket.length, 
     products: products, 
     filteredProducts: [],
     addToBasket: buttonFuncs.addToBasket, 
@@ -367,8 +368,10 @@ function constructBasket() {
         li.push( { 
           name: p.name,
           // name: products[2].find( (product) => product.id == basket[i].productID ).name,
-          quantity: basket[i].quantity
+          quantity: basket[i].quantity,
+          basketImage: p.photoUrls
         });
+        console.log( p )
     }
   };
   return li;
