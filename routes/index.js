@@ -9,8 +9,6 @@ class Order {
   constructor(basketItems, shipDate, status, complete ) {
     // this.id = id; // int
     this.id = nextOrderID++;
-    // this.productId = productId; // list<int>
-    // this.quantity = quantity; // list<int>
     this.products = basketItems; // list<BasketItem>
     this.shipDate = shipDate; // string
     this.status = status; // enum placed, approved, delivered
@@ -101,18 +99,29 @@ var products = [
 
 // var filteredProducts = [];
 
-var basket = [] // List<BasketItem>
+var orders = {
+  
+}; // <User,List<Order>>
+
+console.log( users )
+console.log( users[0].id )
+
+for ( let i = 0; i < users.length; ++i ) {
+  orders[i] = [];  
+}
+
+var basket = {} // <User,List<BasketItem>>
 
 var buttonFuncs = {
 
-  addToBasket: function( pID ) {
+  addToBasket: function( userID, pID ) {
     fetch('/api/basket', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ id: pID })
+        body: JSON.stringify({ userID: userID, productID: pID })
     })
   },
 
@@ -160,6 +169,25 @@ var buttonFuncs = {
   });
   */
   },
+
+  buyOrder: function( _user ) {
+    orders[_user].push( basket[_user] );
+    b
+  },
+
+  increaseBasketItemQuantity: function( user, id, i ) {
+    fetch(`/basket/increaseQuantity`, {
+      method: 'POST',
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify( { user: user, id: id, i: i } )
+    })
+    // var url = new URL( '/basket/' + user + '/' + id + '/' + i, 'http://localhost:3000/' );
+    
+    // return url;
+  }
 
 };
 
@@ -215,7 +243,6 @@ router.get( '/product/:findByStatus', (req, res) => {
     clickBtn: buttonFuncs.clickBtn, 
     findByStatus: buttonFuncs.findByStatus
   } );
-
 } );
 
 router.get( '/api/product/:findByStatus', (req, res) => {
@@ -297,7 +324,7 @@ router.post('/api/basket', (req, res) => {
   // product.inventory--;
   var p = products.find( (product) => product.id === req.body.id );
   console.log( p )
-  addItemToBasket( p )
+  addItemToBasket( users[0], p )
 
   // products.push( new Product( ("Pande" + nextPanID), 42.5, categoryPande, [], tag1, "In Store", 4 ) );
   // console.log( products );
@@ -315,12 +342,12 @@ function constructBasket() {
   return li;
 }
 
-function addItemToBasket( product ) {
+function addItemToBasket( user, product ) {
   var found = false;
   var i;
-  console.log( basket.length )
-  for ( i = 0; i < basket.length; i++ ) {
-    if ( basket[i].productID == product.id ) {
+  console.log( basket[user].length )
+  for ( i = 0; i < basket[user].length; i++ ) {
+    if ( basket[user][i].productID == product.id ) {
       found = true;
       break;
     }
@@ -329,10 +356,10 @@ function addItemToBasket( product ) {
   console.log( "i is -> " + i );
   if ( found ) {
     // console.log( basket[i].quantity )
-    basket[i].quantity += 1;
+    basket[user][i].quantity += 1;
     // console.log( basket.quantity[i] )
   } else {
-    basket.push( new BasketItem( product.id, 1 ) );
+    basket[user].push( new BasketItem( product.id, 1 ) );
   }
   
 }
@@ -342,8 +369,21 @@ router.get( '/basket', (req, res) => {
   var li = constructBasket(); // Product name, quantity
 
   console.log( li )
-  res.render( 'basket', { order: li } );
+  res.render( 'basket', { user: users[0], order: li } );
 } )
+
+router.post( '/basket/increaseQuantity', (req, res) => {
+  let i = req.body.i;
+  let user = req.body.user;
+  let id = req.body.id;
+  for ( index = 0; index < basket[user].length; ++index ) {
+    if (basket[user].productID === id ) {
+      basket[user].quantity += i;
+      res.status(200).send( "success" );
+    }
+  }
+  res.status(400).send( "Something went bad..." );
+} );
 
 // Nikolaj arbejder her //
 // Store calls
