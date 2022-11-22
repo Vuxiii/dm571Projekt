@@ -226,27 +226,7 @@ router.get('/product', (req, res) => {
   } );
 })
 
-// Marcell START
-router.get('/marcellsTest', (req, res) => {
-  res.render("marcellsTest", { 
-    products: products, 
-    filteredProducts: [],
-    addToBasket: buttonFuncs.addToBasket, 
-    clickBtn: buttonFuncs.clickBtn, 
-    findByStatus: buttonFuncs.findByStatus
-  } );
-})
-
-router.get('/pots', (req, res) => {
-  res.render("pots", { 
-    products: products, 
-    filteredProducts: [],
-    addToBasket: buttonFuncs.addToBasket, 
-    clickBtn: buttonFuncs.clickBtn, 
-    findByStatus: buttonFuncs.findByStatus
-  } );
-})
-
+// Marcell Start:
 router.get('/pans', (req, res) => {
   res.render("pans", { 
     products: products, 
