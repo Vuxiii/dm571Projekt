@@ -144,10 +144,10 @@ console.log( users )
 console.log( users[0].id )
 
 for ( let i = 0; i < users.length; ++i ) {
-  orders[i] = [];  
+  orders[users[i].id] = [];  
 }
 
-var basket = {} // <User,List<BasketItem>>
+var basket = {} // <User.id,List<BasketItem>>
 
 basket[users[0]] = [];
 basket[users[1]] = [];
@@ -291,6 +291,24 @@ router.get('/userprofile', (req, res) => {
   res.render("userprofile", { users: users } );
   
 })
+
+
+router.get('/orders', (req, res) => {
+  console.log( orders );
+  res.render("orders", { 
+    users: users,
+    orderss: orders,
+    // bbasket: basket.length, 
+    // user: users[0],
+    // products: products, 
+    // filteredProducts: [],
+    // addToBasket: buttonFuncs.addToBasket, 
+    // clickBtn: buttonFuncs.clickBtn, 
+    // findByStatus: buttonFuncs.findByStatus
+  } );
+})
+
+
 
 
 // Marcell Slut:

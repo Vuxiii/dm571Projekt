@@ -1,0 +1,19 @@
+extends layout
+
+block layout-content
+  script.
+    
+    function onAddToBasketClick( userid, id ) {
+      fun = #{addToBasket}
+      fun( userid, id )
+    }
+  - var n = 0
+  div.divForheader
+  each user in users
+    h1= user.id
+    - var li = orderss
+    - console.log( "Hej " + orderss )
+    //- each order in li
+    //-   div.center
+    //-     h2 Order
+    //-     order.id
