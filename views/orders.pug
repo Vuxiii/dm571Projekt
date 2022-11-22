@@ -10,10 +10,17 @@ block layout-content
   - var n = 0
   div.divForheader
   each user in users
-    h1= user.id
-    - var li = orderss
-    - console.log( "Hej " + orderss )
-    //- each order in li
-    //-   div.center
-    //-     h2 Order
-    //-     order.id
+    h1= "User" + user.id + "'s orders:"
+    - var li = orderss[user.id]
+    - console.log( "Hej " + li )
+    each order in li
+      //- div.center
+        
+      h2= "Order ID: " + order.id
+      if order.products.length > 0
+        h3 Items:
+
+        each item in order.products
+          p= "Product ID: " + item.productID + " | Quantity: " + item.quantity
+      else
+        p Empty Order!

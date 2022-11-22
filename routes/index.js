@@ -137,20 +137,19 @@ var productsPot = [
 
 
 var orders = {
-  
-}; // <User,List<Order>>
+}; // <User.id,List<Order>>
 
 console.log( users )
 console.log( users[0].id )
 
 for ( let i = 0; i < users.length; ++i ) {
-  orders[users[i].id] = [];  
+  orders[users[i].id] = [ new Order( [ new BasketItem( 3, 4 ), new BasketItem( 1, 2 ) ], "NOW", "in shipping", false ) ];  
 }
-
+// basketItems, shipDate, status, complete
 var basket = {} // <User.id,List<BasketItem>>
 
-basket[users[0]] = [];
-basket[users[1]] = [];
+basket[users[0].id] = [];
+basket[users[1].id] = [];
 
 // TODO: We need to check every place we refere to basket. IT IS NOW A MAP
 var buttonFuncs = {
@@ -211,19 +210,26 @@ var buttonFuncs = {
   */
   },
 
-  buyOrder: function( _user ) {
-    orders[_user].push( basket[_user] );
-    b
-  },
-
-  increaseBasketItemQuantity: function( user, id, i ) {
-    fetch(`/basket/increaseQuantity`, {
+  buyOrder: function( _userID ) {
+    // Make post to basket or order?
+    fetch(`/basket/buy`, {
       method: 'POST',
       headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
       },
-      body: JSON.stringify( { user: user, id: id, i: i } )
+      body: JSON.stringify( { userID: _userID } )
+    })
+  },
+
+  increaseBasketItemQuantity: function( userID, productID, i ) {
+    fetch(`/api/basket/increaseQuantity`, {
+      method: 'POST',
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify( { user: userID, id: productID, i: i } )
     })
     // var url = new URL( '/basket/' + user + '/' + id + '/' + i, 'http://localhost:3000/' );
     
@@ -307,7 +313,6 @@ router.get('/orders', (req, res) => {
     // findByStatus: buttonFuncs.findByStatus
   } );
 })
-
 
 
 
@@ -404,7 +409,7 @@ router.post('/api/basket', (req, res) => {
       console.log( id, "==", list[j].id, " -> ", id == list[j].id )
       if ( list[j].id == id ) {
         p = list[j];
-        // console.log( p );
+        console.log( "*******************", users );
         addItemToBasket( users[req.body.userID], p )
         return;
       }
@@ -420,16 +425,17 @@ router.post('/api/basket', (req, res) => {
 function constructBasket( user ) {
   var li = [];
   console.log( "user: " + user.id );
-  console.log( "Basket: " + basket[user] );
-  for ( i = 0; i < basket[user].length; i++ ) {
+  console.log( "Basket: " + basket[user.id] );
+  for ( i = 0; i < basket[user.id].length; i++ ) {
     for( n = 0; n < products.length; n++){
       list=products[n];
-      const p = list.find( (product) => product.id == basket[user][i].productID )
+      const p = list.find( (product) => product.id == basket[user.id][i].productID )
       if(p != undefined)
         li.push( { 
           name: p.name,
-          // name: products[2].find( (product) => product.id == basket[user][i].productID ).name,
-          quantity: basket[user][i].quantity,
+          productID: p.productID,
+          // name: products[2].find( (product) => product.id == basket[user.id][i].productID ).name,
+          quantity: basket[user.id][i].quantity,
           basketImage: p.photoUrls
         });
         console.log( p )
@@ -441,9 +447,10 @@ function constructBasket( user ) {
 function addItemToBasket( user, product ) {
   var found = false;
   var i;
-  console.log( basket[user].length )
-  for ( i = 0; i < basket[user].length; i++ ) {
-    if ( basket[user][i].productID == product.id ) {
+  console.log( "IDDDDD: ", user.id )
+  console.log( "IDDDDD: ", basket[user.id] )
+  for ( i = 0; i < basket[user.id].length; i++ ) {
+    if ( basket[user.id][i].productID == product.id ) {
       found = true;
       break;
     }
@@ -451,13 +458,13 @@ function addItemToBasket( user, product ) {
   console.log( "I " + (found ? "found" : "did not find") + " the product in the basket.")
   console.log( "i is -> " + i );
   if ( found ) {
-    // console.log( basket[user][i].quantity )
-    basket[user][i].quantity += 1;
-    // console.log( basket[user].quantity[i] )
+    // console.log( basket[user.id][i].quantity )
+    basket[user.id][i].quantity += 1;
+    // console.log( basket[user.id].quantity[i] )
   } else {
     console.log("hej " + product)
-    console.log( basket[user] )
-    basket[user].push( new BasketItem( product.id, 1 ) );
+    console.log( basket[user.id] )
+    basket[user.id].push( new BasketItem( product.id, 1 ) );
     console.log("asdfasdfasdf")
   }
   
@@ -469,22 +476,46 @@ router.get( '/basket', (req, res) => {
 
   console.log( users[0].id )
   res.render( 'basket', { 
+    increaseQuant: buttonFuncs.increaseBasketItemQuantity,
+    buyOrder: buttonFuncs.buyOrder,
     user: users[0],
     order: li
   } );
 } )
 
-router.post( '/basket/increaseQuantity', (req, res) => {
+router.post( '/api/basket/increaseQuantity', (req, res) => {
   let i = req.body.i;
   let user = req.body.user;
   let id = req.body.id;
-  for ( index = 0; index < basket[user].length; ++index ) {
-    if (basket[user].productID === id ) {
-      basket[user].quantity += i;
+  console.log( user );
+  console.log( basket );
+  console.log( req.body );
+  for ( let index = 0; index < basket[user].length; ++index ) {
+    console.log("YAYAYAYYAAYYA");
+    console.log(basket[user][index])
+    if (basket[user][index].productID === id ) {
+      basket[user][index].quantity += i;
       res.status(200).send( "success" );
     }
   }
   res.status(400).send( "Something went bad..." );
+} );
+
+router.post( '/api/basket/buy', (req, res) => {
+  const userID = req.body.userID;
+  
+  if ( basket[userID].length > 0 ) {
+    orders[userID].push( basket[userID] );
+    basket[userID] = [];
+
+    res.status(200).send( "success" );
+  } else {
+    res.status(400).send( "Empty Basket" );
+  }
+
+  
+
+  
 } );
 
 // Nikolaj arbejder her //
