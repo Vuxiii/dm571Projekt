@@ -166,8 +166,16 @@ var buttonFuncs = {
   },
 
   findByStatus: function( _status ) {
-    var url = new URL( '/product/findByStatus', 'http://localhost:3000/' );
-    url.searchParams.set( 'status', _status );
+  //   fetch('/product/' + _status, {
+  //     method: 'GET',
+  //     headers: {
+  //         'Accept': 'application/json',
+  //         'Content-Type': 'application/json'
+  //     }
+  // } );
+    
+    var url = new URL( '/product/' + _status, 'http://localhost:3000/' );
+    // url.searchParams.set( 'status', _status );
     
     return url;
     /* 
@@ -249,10 +257,15 @@ router.get('/userprofile', (req, res) => {
   
 })
 
-router.get( '/product/findByStatus', (req, res) => {
-  let li = findByStatus( req.query );
+
+// Marcell Slut:
+
+
+router.get( '/product/:findByStatus', (req, res) => {
+  console.log("I WAS CALLED")
+  let li = findByStatus( { status: req.params.findByStatus } );
   if ( li === undefined ) li = [];
-  
+  console.log(li)
   res.render("product", { 
     products: products, 
     filteredProducts: li,
@@ -263,8 +276,9 @@ router.get( '/product/findByStatus', (req, res) => {
 
 } );
 
-router.get( '/api/product/findByStatus', (req, res) => {
-  let li = findByStatus( req.query );
+router.get( '/api/product/:findByStatus', (req, res) => {
+  
+  let li = findByStatus( { status: req.params.findByStatus } );
 
   if ( li )
     res.status(200).send( JSON.stringify( { result: li } ) );
@@ -274,7 +288,6 @@ router.get( '/api/product/findByStatus', (req, res) => {
 } );
 
 function findByStatus( query ) {
-  console.log( query );
   let pred;
   if ( query.status === "in store" ) {
     pred = (product) => product.status === "in store";
