@@ -95,7 +95,7 @@ var tag1 = new Tag( 0, "Rustfrit Stål" );
 
 var products = [ 
   [ 
-	  new Product( ("Pande" + nextPanID), 1, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 10 ),
+	  new Product( ("Pande" + nextPanID), 1, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 10 ),
 	  new Product( ("Pande" + nextPanID), 2, categoryPande, [], tag1, "in store", 4 ),
 	  new Product( ("Pande" + nextPanID), 3, categoryPande, [], tag1, "in store", 4 ),
 	  new Product( ("Pande" + nextPanID), 4, categoryPande, [], tag1, "in store", 4 ),
@@ -113,6 +113,29 @@ var products = [
 	  new Product( ("Pande" + nextPanID), 12, categoryPande, [], tag1, "in store", 4 ),
   ]
 ];
+
+var productsPot = [ 
+  [ 
+	  new Product( ("Pots" + nextPanID), 1, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 10 ),
+	  new Product( ("Pots" + nextPanID), 2, categoryPande, [], tag1, "in store", 4 ),
+	  new Product( ("Pots" + nextPanID), 3, categoryPande, [], tag1, "in store", 4 ),
+	  new Product( ("Pots" + nextPanID), 4, categoryPande, [], tag1, "in store", 4 ),
+  ],
+  [ 
+	  new Product( ("Pots" + nextPanID), 5, categoryPande, [], tag1, "in store", 10 ),
+	  new Product( ("Pots" + nextPanID), 6, categoryPande, [], tag1, "in store", 4 ),
+	  new Product( ("Pots" + nextPanID), 7, categoryPande, [], tag1, "in store", 4 ),
+	  new Product( ("Pots" + nextPanID), 8, categoryPande, [], tag1, "in store", 4 ),
+  ],
+  [ 
+	  new Product( ("Pots" + nextPanID), 9, categoryPande, [], tag1, "in store", 10 ),
+	  new Product( ("Pots" + nextPanID), 10, categoryPande, [], tag1, "in store", 4 ),
+	  new Product( ("Pots" + nextPanID), 11, categoryPande, [], tag1, "in store", 4 ),
+	  new Product( ("Pots" + nextPanID), 12, categoryPande, [], tag1, "in store", 4 ),
+  ]
+];
+
+
 // var filteredProducts = [];
 
 var basket = [] // List<BasketItem>
@@ -203,7 +226,7 @@ router.get('/marcellsTest', (req, res) => {
 
 router.get('/pots', (req, res) => {
   res.render("pots", { 
-    products: products, 
+    products: productsPot, 
     filteredProducts: [],
     addToBasket: buttonFuncs.addToBasket, 
     clickBtn: buttonFuncs.clickBtn, 
@@ -221,12 +244,7 @@ router.get('/pans', (req, res) => {
   } );
 })
 
-// Marcell END
 
-router.get('/pots', (req, res) => {
-  res.render("pots", { users: users } );
-  
-})
 router.get('/userprofile', (req, res) => {
   res.render("userprofile", { users: users } );
   
@@ -276,15 +294,6 @@ function findByStatus( query ) {
 
   return li;
 }
-router.get('/pans', (req, res) => {
-  res.render("pans", { users: users } );
-  
-})
-
-router.get('/pots', (req, res) => {
-  res.render("pots", { users: users } );
-  
-})
 router.get('/userprofile', (req, res) => {
   res.render("userprofile", { users: users } );
   
@@ -310,6 +319,7 @@ router.post('/api/product', (req, res) => {
   console.log( products );
   
   // Maybe add success
+  // Marcell: adde productsPot to products? 
   res.render("product", { products: products, addToBasket: buttonFuncs.addToBasket, clickBtn: buttonFuncs.clickBtn } );
 
 })
@@ -337,12 +347,17 @@ router.post('/api/basket', (req, res) => {
 function constructBasket() {
   var li = [];
   for ( i = 0; i < basket.length; i++ ) {
-    li.push( { 
-      name: products.find( (product) => product.id == basket[i].productID ).name,
-      quantity: basket[i].quantity
-    } );
-    
-  }
+    for( n = 0; n < products.length; n++){
+      list=products[n];
+      const p = list.find( (product) => product.id == basket[i].productID )
+      if(p != undefined)
+        li.push( { 
+          name: p.name,
+          // name: products[2].find( (product) => product.id == basket[i].productID ).name,
+          quantity: basket[i].quantity
+        });
+    }
+  };
   return li;
 }
 
@@ -508,6 +523,10 @@ function deleteUser(username){
   }
 }
 // Til her
+router.get('/antonTest', (req, res) => {
+  res.render("antonTest", { users: users } );
+  
+})
 
 
 module.exports = router;

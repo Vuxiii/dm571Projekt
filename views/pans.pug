@@ -1,58 +1,21 @@
 extends layout
+
 block layout-content
-  script.
-      function onButtonClick(){
-        //- console.log('#{title}')
-        fun = #{clickBtn}
-        fun()
-        //- console.log(val)
-      }
+    script.
+      
       function onAddToBasketClick( id ) {
         fun = #{addToBasket}
         fun(id)
       }
-      function onFindByStatus( status ) {
-        fun = #{findByStatus}
-        fun(status)
-      }
-  div.center
-    // Make Loops With products from database
-    .imageClass
-      img.picView(src='/images/fried-rice.jpg' alt='login' style='width:100px; height:100px;')
-      p img text
-    .imageClass
-      img.picView(src='/images/fried-rice.jpg' alt='login' style='width:100px; height:100px;')
-      p img text
-    .imageClass
-      img.picView(src='/images/fried-rice.jpg' alt='login' style='width:100px; height:100px;')
-      p image text
-    .imageClass
-      img.picView(src='/images/fried-rice.jpg' alt='login' style='width:100px; height:100px;')
-      p image text
-  div
-  div.center
-    .imageClass
-      img.picView(src='/images/fried-rice.jpg' alt='login' style='width:100px; height:100px;')
-      p image text 
-    .imageClass
-      img.picView(src='/images/fried-rice.jpg' alt='login' style='width:100px; height:100px;')
-      p image text
-    .imageClass
-      img.picView(src='/images/fried-rice.jpg' alt='login' style='width:100px; height:100px;')
-      p image text
-    .imageClass
-      img.picView(src='/images/fried-rice.jpg' alt='login' style='width:100px; height:100px;')
-      p image text
-  div.center
-    .imageClass
-      img.picView(src='/images/fried-rice.jpg' alt='login' style='width:100px; height:100px;')
-      p image text
-    .imageClass
-      img.picView(src='/images/fried-rice.jpg' alt='login' style='width:100px; height:100px;')
-      p image text
-    .imageClass
-      img.picView(src='/images/fried-rice.jpg' alt='login' style='width:100px; height:100px;')
-      p image text
-    .iamgeClass
-      img.picView(src='/images/fried-rice.jpg' alt='login' style='width:100px; height:100px;') 
-      p image text
+    - var n = 0
+    div.divForheader
+    each list in products
+      div.center
+        each product in list
+          div.center
+            .imageClass
+              p= product.id
+              // img.picView(src= ('`' + product.photoUrls + '`') alt='login' style='width:100px; height:100px;')
+              img.picView(src='/images/fried-rice.jpg' alt='login' style='width:120px; height:120px;')
+              .center
+                button.basketB(onclick='onAddToBasketClick( ' + product.id + ' )') Add to basket

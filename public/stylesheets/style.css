@@ -188,6 +188,21 @@ button{
   border-bottom: var(--ui-shadow-border);
   box-shadow: var(--ui-shadow);
 }
+.casketButton{
+  background-color: white;
+  color: black;
+  margin-left: 20px;
+  margin-right: 18px;
+  padding: 10px 25px;
+  text-align: center;
+  font-size: 12px;
+  border-radius: 5px;
+  overflow: hidden;
+  background: red;
+  font-family: "Share Tech Mono", monospace;
+  right: 0;
+}
+
 
 .myPic{
   background: url("/images/fried-rice.jpg") left bottom;
