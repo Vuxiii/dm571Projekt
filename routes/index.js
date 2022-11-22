@@ -359,9 +359,11 @@ router.post('/api/basket', (req, res) => {
 function constructBasket() {
   var li = [];
   for ( i = 0; i < basket.length; i++ ) {
+    product = products.find( (product) => product.id == basket[i].productID );
     li.push( { 
-      name: products.find( (product) => product.id == basket[i].productID ).name,
-      quantity: basket[i].quantity
+      name: product.name,
+      quantity: basket[i].quantity,
+      images: product.photoUrls
     } );
     
   }
