@@ -86,9 +86,13 @@ block layout-content
     br
 
     button(onclick='onButtonClick()') Add Product
-    each product in products
-        h1= product.name
-        p kr #{product.price}
-        p quantity #{product.inventory}
-        button(onclick='onAddToBasketClick( ' + product.id + ' )') Add to basket
+    each list in products
+      each pro in list
+        h1= pro.name
+        p kr #{pro.price}
+        p quantity #{pro.inventory}
+        button(onclick='onAddToBasketClick( ' + pro.id + ' )') Add to basket
+      br
+      //- each product in list
+      //-     
     

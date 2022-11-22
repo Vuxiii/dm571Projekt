@@ -217,6 +217,7 @@ router.get('/user', (req, res) => {
 })
 
 router.get('/product', (req, res) => {
+  // console.log(products);
   res.render("product", { 
     products: products, 
     filteredProducts: [],
@@ -337,7 +338,8 @@ router.post('/api/product', (req, res) => {
 })
 
 router.post('/api/basket', (req, res) => {
-  console.log( req.body.id );
+  console.log( req.body );
+  let id = req.body.userID;
   // product = ;
 
   // product.inventory--;
@@ -345,12 +347,25 @@ router.post('/api/basket', (req, res) => {
   //for(list in products){
   for ( i = 0; i < products.length; i++){
     list=products[i];
-    p = list.find( (product) => product.id === req.body.id );
-    console.log( p )
-    if(p)
-      break;
+    // console.log( list )
+    for ( let j = 0; j < list.length; j++ ) {
+      console.log( id, "==", list[j].id, " -> ", id == list[j].id )
+      if ( list[j].id == id ) {
+        p = list[j];
+        addItemToBasket( p )
+        return;
+      }
+        
+    }
   }
-  addItemToBasket( p )
+    console.log( "FAILURE IN API BASKET" );
+  //   p = list.find( (product) => product.id == req.body.id );
+  //   console.log( p )
+  //   if(p)
+  //     break;
+  // }
+  // console.log( "Found product: ", p )
+  // addItemToBasket( p )
   
   // products.push( new Product( ("Pande" + nextPanID), 42.5, categoryPande, [], tag1, "In Store", 4 ) );
   // console.log( products );
@@ -359,7 +374,9 @@ router.post('/api/basket', (req, res) => {
 function constructBasket() {
   var li = [];
   for ( i = 0; i < basket.length; i++ ) {
-    product = products.find( (product) => product.id == basket[i].productID );
+    console.log( "Hej" )
+    const product = products.find( (product) => product.id == basket[i].productID );
+    console.log( product )
     li.push( { 
       name: product.name,
       quantity: basket[i].quantity,
@@ -397,7 +414,13 @@ router.get( '/basket', (req, res) => {
   var li = constructBasket(); // Product name, quantity
 
   console.log( li )
-  res.render( 'basket', { user: users[0], order: li } );
+  console.log( { user: users[0], order: li } )
+  res.render( 'basket', { 
+    increaseQuant: buttonFuncs.increaseBasketItemQuantity,
+    buyOrder: buttonFuncs.buyOrder,
+    user: users[0], 
+    order: li 
+  } );
 } )
 
 router.post( '/basket/increaseQuantity', (req, res) => {

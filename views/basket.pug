@@ -1,28 +1,28 @@
 extends layout
 
 block layout-content
-   script.
-      
-      function buy( user ){
-        //- console.log('#{title}')
-        fun = #{buyOrder}
-        fun( user )
-        //- console.log(val)
-      }
+  script.
+    function buy( user ){
+      fun = #{buyOrder}
+      fun( user )
+    }
 
-      function increaseQuantity( user, id, i ) {
-        fun = #{increaseBasketItemQuantity}
-        fun( user, id, i )
-        
-        //- window.location.href = fun( user, id, i ).toString()
-      }
-    
+    function increaseQuantity( user, id, i ) {
+      fun = #{increaseQuant}
+      fun( user, id, i )
+
+      //- window.location.href = fun( user, id, i ).toString()
+    }
+
   p Hej i BASKET
-  each item in order
-    h1= item.name
-    p= item.quantity
-    p Hej med dig :I
-    button(onclick='increaseQuantity( ' + user + ',' + item.id + ', 1 )') +
-    button(onclick='increaseQuantity( ' + user + ',' + item.id + ', -1 )') -
-      
-  button(onclick='buy( ' + user + ' )') Buy
+  if order.length > 0
+    each item in order
+      h1= item.name
+      p= item.quantity
+      p Hej med dig :I
+      button(onclick='increaseQuantity( ' + user + ',' + item.id + ', 1 )') +
+      button(onclick='increaseQuantity( ' + user + ',' + item.id + ', -1 )') -
+        
+    button(onclick='buy( ' + user + ' )') Buy
+  else
+    h1 Basket is empty
