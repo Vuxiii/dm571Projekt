@@ -213,6 +213,7 @@ router.get('/user', (req, res) => {
 
 router.get('/product', (req, res) => {
   res.render("product", { 
+    basketLength: basket.length, 
     products: products, 
     filteredProducts: [],
     addToBasket: buttonFuncs.addToBasket, 
