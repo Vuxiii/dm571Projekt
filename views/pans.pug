@@ -3,9 +3,9 @@ extends layout
 block layout-content
     script.
       
-      function onAddToBasketClick( id ) {
+      function onAddToBasketClick( userid, id ) {
         fun = #{addToBasket}
-        fun(id)
+        fun( userid, id )
       }
     - var n = 0
     div.divForheader
@@ -18,4 +18,4 @@ block layout-content
               // img.picView(src= ('`' + product.photoUrls + '`') alt='login' style='width:100px; height:100px;')
               img.picView(src="p".replace("p", product.photoUrls) alt='login' style='width:120px; height:120px;')
               .center
-                button.basketB(onclick='onAddToBasketClick( ' + product.id + ' )') Add to basket
+                button.basketB(onclick='onAddToBasketClick( ' + user.id + ', ' + product.id + ' )') Add to basket

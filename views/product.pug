@@ -15,8 +15,6 @@ block layout-content
         fun(id)
       }
       function onFindByStatus( status ) {
-        
-         
         fun = #{findByStatus}
         //- fun( status )
         //- window.location.reload()
@@ -26,7 +24,6 @@ block layout-content
 
     h1 Here you can add a Product to the store!
     p Please insert the information about the product.
-    p= basketLength
     form.myView( action="/product" method="post")
       
       label( for="productName" ) Enter the name of the product 
@@ -89,9 +86,13 @@ block layout-content
     br
 
     button(onclick='onButtonClick()') Add Product
-    each product in products
-        h1= product.name
-        p kr #{product.price}
-        p quantity #{product.inventory}
-        button(onclick='onAddToBasketClick( ' + product.id + ' )') Add to basket
+    each list in products
+      each pro in list
+        h1= pro.name
+        p kr #{pro.price}
+        p quantity #{pro.inventory}
+        button(onclick='onAddToBasketClick( ' + pro.id + ' )') Add to basket
+      br
+      //- each product in list
+      //-     
     

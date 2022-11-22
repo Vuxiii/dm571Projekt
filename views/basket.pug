@@ -1,8 +1,26 @@
 extends layout
 block layout-content
+  script.
+    function buy( user ){
+      fun = #{buyOrder}
+      fun( user )
+    }
+
+    function increaseQuantity( user, id, i ) {
+      fun = #{increaseQuant}
+      fun( user, id, i )
+
+      //- window.location.href = fun( user, id, i ).toString()
+    }
   // h1= "Here you can see what is in it your basket:"
-  each item in order
-    // h2= item.name
-    p= item.quantity
-    h2= item.basketImage
-    // Er det den rigtige???
+  if order.length > 0
+    each item in order
+      // h2= item.name
+      p= item.quantity
+      h2= item.basketImage
+      // Er det den rigtige???
+      button(onclick='increaseQuantity( ' + user + ',' + item.id + ', 1 )') +
+      button(onclick='increaseQuantity( ' + user + ',' + item.id + ', -1 )') -
+    button(onclick='buy( ' + user + ' )') Buy
+  else
+    h1 Basket is empty
