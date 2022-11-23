@@ -1,34 +1,55 @@
 extends layout
 block layout-content
   script.
-    function buy( user ){
+    function buy(){
       fun = #{buyOrder}
-      fun( user )
+      fun( loggedInUser )
     }
 
-    function increaseQuantity( userID, productID, i ) {
-      console.log( userID, " ", productID, " ", i )
+    function increaseQuantity( productID, i ) {
+      console.log( loggedInUser, " ", productID, " ", i )
       fun = #{increaseQuant}
-      fun( userID, productID, i )
+      fun( loggedInUser, productID, i )
 
       //- window.location.href = fun( user, id, i ).toString()
     } 
-  h2= "Basket items" 
-  div.basketDiv
-    button(onclick='buy( ' + user + ' )') Buy
-  if order.length > 0
-    each item in order
-      // h2= item.name
-      div.basketDiv
-        h4= item.name
-      div.basketDiv(style='width: 250px; height: 250px')
-        img.picView(src="p".replace("p", item.basketImage) alt='login' style='width:100%; height:100%;')
-      div.basketDiv
-        
-        .basketButton(onclick='increaseQuantity( ' + user.id + ',' + item.productID + ', 1 )') +
-        .basketButton(onclick='increaseQuantity( ' + user.id + ',' + item.productID + ', -1 )') -
-        h4= item.quantity
-    p="hello" 
-  else
-    h1 Basket is empty
-  div.Basket
+  .row1
+    .column1
+      h2 Basket Items 
+      if order.length > 0
+        each item in order
+          // h2= item.name
+          div.basketDiv
+            h2= item.name
+          div.basketDiv(style='width: 250px; height: 250px')
+            img.picView(src="p".replace("p", item.basketImage) alt='login' style='width:100%; height:100%;')
+          div.basketDiv
+            .basketButton(onclick='increaseQuantity( ' + item.productID + ', 1 )') +
+            .basketButton(onclick='increaseQuantity( ' + item.productID + ', -1 )') -
+            h1= item.quantity
+    .column1
+      .div2
+        h2 Receipt 
+        p= "Pande 2: 455"
+        p= "Total price: 455"
+        button(onclick='buy()') Buy
+
+  //h2= "Basket items" 
+  //div.basketDiv
+  //  button(onclick='buy( ' + user + ' )') Buy
+  //if order.length > 0
+  //  each item in order
+  //    // h2= item.name
+  //    div.basketDiv
+  //      h4= item.name
+  //    div.basketDiv(style='width: 250px; height: 250px')
+  //      img.picView(src="p".replace("p", item.basketImage) alt='login' style='width:100%; height:100%;')
+  //    div.basketDiv
+  //      
+  //      .basketButton(onclick='increaseQuantity( ' + user.id + ',' + item.productID + ', 1 )') +
+  //      .basketButton(onclick='increaseQuantity( ' + user.id + ',' + item.productID + ', -1 )') -
+  //      h4= item.quantity
+  //  p="hello" 
+  //else
+  //  h1 Basket is empty
+  //div.Basket

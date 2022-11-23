@@ -8,6 +8,16 @@ html
     meta(name="theme-color", content="#000000")
     // .title #{title}
     link(rel="stylesheet", href="/stylesheets/style.css")
+    script.
+      var loggedInUser = -1
+      var urlUser = "&id=-1"
+      function login( userID ) {
+        loggedInUser = userID
+        let url = new URLSearchParams();
+        url.set('id', userID);
+        urlUser = "&" + url.toString();
+      }
   body
+    
     include navbar.pug
     block layout-content

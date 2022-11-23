@@ -1,16 +1,11 @@
-doctype html
-html
-    head
-        title Log In 
-    body
-        h2 Log In 
-        - let user = {name: "Marcell", loggedin: True, lastLogin: 6}
-            a(href="/login") Log In
-        p asdas
-    script.
-        function onButtonClick(){
-        //- console.log('#{title}')
-        fun = #{clickBtn}
-        fun()
-        //- console.log(val)
-        }
+extends layout
+block layout-content
+    h1 Log In
+    h2 Please select a User
+    each user in users
+        h3= user.username 
+        p= user.userStatus
+        button(onclick='login( ' + user.id + ' )') select
+    //- - let user = {name: "Marcell", loggedin: True, lastLogin: 6}
+    //-     a(href="/login") Log In
+    //- p asdas 

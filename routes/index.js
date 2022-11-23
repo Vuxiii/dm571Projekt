@@ -90,48 +90,47 @@ var users = [
 ];
 
 var categoryPande = new Category( 0, "Pander" );
+var categoryPot = new Category( 1, "Gryder" );
 var tag1 = new Tag( 0, "Rustfrit Stål" );
 
 
 var products = [ 
   [ 
-	  new Product( ("Pande" + nextPanID), 1, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 10 ),
-	  new Product( ("Pande" + nextPanID), 2, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 4 ),
-	  new Product( ("Pande" + nextPanID), 3, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 4 ),
-	  new Product( ("Pande" + nextPanID), 4, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 4 ),
+	  new Product( ("Pande" + nextPanID), 233, categoryPande, ["/images/pande1.webp"], tag1, "in store", 10 ),
+	  new Product( ("Pande" + nextPanID), 450, categoryPande, ["/images/pande2.webp"], tag1, "in store", 4 ),
+	  new Product( ("Pande" + nextPanID), 200, categoryPande, ["/images/pande3.webp"], tag1, "in store", 4 ),
+	  new Product( ("Pande" + nextPanID), 50, categoryPande, ["/images/pande4.webp"], tag1, "in store", 4 ),
   ],
   [ 
-	  new Product( ("Pande" + nextPanID), 5, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 10 ),
-	  new Product( ("Pande" + nextPanID), 6, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 4 ),
-	  new Product( ("Pande" + nextPanID), 7, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 4 ),
-	  new Product( ("Pande" + nextPanID), 8, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 4 ),
+	  new Product( ("Pande" + nextPanID), 450, categoryPande, ["/images/pande5.webp"], tag1, "in store", 10 ),
+	  new Product( ("Pande" + nextPanID), 500, categoryPande, ["/images/pande6.webp"], tag1, "in store", 4 ),
+	  new Product( ("Pande" + nextPanID), 300, categoryPande, ["/images/pande7.webp"], tag1, "in store", 4 ),
+	  new Product( ("Pande" + nextPanID), 100, categoryPande, ["/images/pande8.webp"], tag1, "in store", 4 ),
   ],
   [ 
-	  new Product( ("Pande" + nextPanID), 9, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 10 ),
-	  new Product( ("Pande" + nextPanID), 10, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 4 ),
-	  new Product( ("Pande" + nextPanID), 11, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 4 ),
-	  new Product( ("Pande" + nextPanID), 12, categoryPande, ["/images/fried-rice.jpg"], tag1, "in store", 4 ),
-  ]
-];
-
-var productsPot = [ 
+	  new Product( ("Pande" + nextPanID), 9, categoryPande,  ["/images/pande9.webp"], tag1, "in store", 10 ),
+	  new Product( ("Pande" + nextPanID), 10, categoryPande, ["/images/pande10.webp"], tag1, "in store", 4 ),
+	  new Product( ("Pande" + nextPanID), 11, categoryPande, ["/images/pande11.webp"], tag1, "in store", 4 ),
+	  new Product( ("Pande" + nextPanID), 12, categoryPande, ["/images/pande12.webp"], tag1, "in store", 4 ),
+  ],
+  /* Pots */ 
   [ 
-	  new Product( ("Pots" + nextPanID), 1, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 10 ),
-	  new Product( ("Pots" + nextPanID), 2, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 4 ),
-	  new Product( ("Pots" + nextPanID), 3, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 4 ),
-	  new Product( ("Pots" + nextPanID), 4, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 4 ),
+	  new Product( ("Pots" + nextPanID), 1, categoryPot, ["/images/gryde2.webp"], tag1, "in store", 10 ),
+	  new Product( ("Pots" + nextPanID), 2, categoryPot, ["/images/gryde2.webp"], tag1, "in store", 4 ),
+	  new Product( ("Pots" + nextPanID), 3, categoryPot, ["/images/gryde2.webp"], tag1, "in store", 4 ),
+	  new Product( ("Pots" + nextPanID), 4, categoryPot, ["/images/gryde2.webp"], tag1, "in store", 4 ),
   ],
   [ 
-	  new Product( ("Pots" + nextPanID), 5, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 10 ),
-	  new Product( ("Pots" + nextPanID), 6, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 4 ),
-	  new Product( ("Pots" + nextPanID), 7, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 4 ),
-	  new Product( ("Pots" + nextPanID), 8, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 4 ),
+	  new Product( ("Pots" + nextPanID), 5, categoryPot, ["/images/gryde2.webp"], tag1, "in store", 10 ),
+	  new Product( ("Pots" + nextPanID), 6, categoryPot, ["/images/gryde2.webp"], tag1, "in store", 4 ),
+	  new Product( ("Pots" + nextPanID), 7, categoryPot, ["/images/gryde2.webp"], tag1, "in store", 4 ),
+	  new Product( ("Pots" + nextPanID), 8, categoryPot, ["/images/gryde2.webp"], tag1, "in store", 4 ),
   ],
   [ 
-	  new Product( ("Pots" + nextPanID), 9, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 10 ),
-	  new Product( ("Pots" + nextPanID), 10, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 4 ),
-	  new Product( ("Pots" + nextPanID), 11, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 4 ),
-	  new Product( ("Pots" + nextPanID), 12, categoryPande, ["/public/images/fried-rice.jpg"], tag1, "in store", 4 ),
+	  new Product( ("Pots" + nextPanID), 9, categoryPot,  ["/images/gryde2.webp"], tag1, "in store", 10 ),
+	  new Product( ("Pots" + nextPanID), 10, categoryPot, ["/images/gryde2.webp"], tag1, "in store", 4 ),
+	  new Product( ("Pots" + nextPanID), 11, categoryPot, ["/images/gryde2.webp"], tag1, "in store", 4 ),
+	  new Product( ("Pots" + nextPanID), 12, categoryPot, ["/images/gryde2.webp"], tag1, "in store", 4 ),
   ]
 ];
 
@@ -146,10 +145,45 @@ for ( let i = 0; i < users.length; ++i ) {
   orders[users[i].id] = [ new Order( [ new BasketItem( 3, 4 ), new BasketItem( 1, 2 ) ], "NOW", "in shipping", false ) ];  
 }
 // basketItems, shipDate, status, complete
-var basket = {} // <User.id,List<BasketItem>>
+var basket = {} // <User.id, List<BasketItem>>
 
 basket[users[0].id] = [];
 basket[users[1].id] = [];
+
+// MOVe me
+function calcBasketPrice( userID ) {
+  // Get basketitems
+  const items = basket[userID];
+
+  let total = 0.0;
+
+  for ( let i = 0; i < items.length; ++i ) {
+    const currentItem = items[i];
+
+    // find product in products by id
+    for ( let row = 0; row < products.length; ++row ) {
+      for ( let j = 0; j < products[row].length; ++j ) {
+        const currentProduct = products[row][j];
+        if ( currentProduct.id == currentItem.productID ) {
+          total += ( currentItem.quantity * currentProduct.price );
+        }
+      } 
+    }
+  }
+  return total;
+}
+
+function findProductPrice( productID ) {
+  for ( let row = 0; row < products.length; ++row ) {
+    for ( let j = 0; j < products[row].length; ++j ) {
+      const currentProduct = products[row][j];
+      if ( currentProduct.id == productID ) {
+        return currentProduct.price;
+      }
+    } 
+  }
+  return -1;
+}
 
 // TODO: We need to check every place we refere to basket. IT IS NOW A MAP
 var buttonFuncs = {
@@ -178,36 +212,10 @@ var buttonFuncs = {
   },
 
   findByStatus: function( _status ) {
-  //   fetch('/product/' + _status, {
-  //     method: 'GET',
-  //     headers: {
-  //         'Accept': 'application/json',
-  //         'Content-Type': 'application/json'
-  //     }
-  // } );
-    
     var url = new URL( '/product/' + _status, 'http://localhost:3000/' );
     // url.searchParams.set( 'status', _status );
     
     return url;
-    /* 
-    console.log( url );
-    fetch( url, {
-      method: 'GET',
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-      }
-      // body: JSON.stringify({ status: _status })
-  } ).then( async function(response) {
-    // if ( !response.ok ) return;
-    // let json = await response.json();
-    // console.log( json.result );
-    // console.log( 'Found: ' + JSON.parse( json ) );
-  }, function(reason) {
-    // console.log( reason )
-  });
-  */
   },
 
   buyOrder: function( _userID ) {
@@ -241,7 +249,10 @@ var buttonFuncs = {
 /* GETTERS */ 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { 
+    title: 'Express',
+    bbasket: basket[users[0].id].length,
+   });
 });
 
 router.get('/user', (req, res) => {
@@ -251,7 +262,7 @@ router.get('/user', (req, res) => {
 
 router.get('/product', (req, res) => {
   res.render("product", { 
-    bbasket: basket.length, 
+    bbasket: basket[users[0].id].length,
     products: products, 
     filteredProducts: [],
     addToBasket: buttonFuncs.addToBasket, 
@@ -271,8 +282,11 @@ router.get('/marcellsTest', (req, res) => {
 })
 
 router.get('/pots', (req, res) => {
-  res.render("pots", { 
-    products: productsPot, 
+  res.render("pans", { 
+    bbasket: basket[users[0].id].length,
+    user: users[0],
+    products: products, 
+    selectedCategory: "Gryder",
     filteredProducts: [],
     addToBasket: buttonFuncs.addToBasket, 
     clickBtn: buttonFuncs.clickBtn, 
@@ -282,9 +296,10 @@ router.get('/pots', (req, res) => {
 
 router.get('/pans', (req, res) => {
   res.render("pans", { 
-    bbasket: basket.length, 
+    bbasket: basket[users[0].id].length,
     user: users[0],
     products: products, 
+    selectedCategory: "Pander",
     filteredProducts: [],
     addToBasket: buttonFuncs.addToBasket, 
     clickBtn: buttonFuncs.clickBtn, 
@@ -304,7 +319,6 @@ router.get('/orders', (req, res) => {
   res.render("orders", { 
     users: users,
     orderss: orders,
-    // bbasket: basket.length, 
     // user: users[0],
     // products: products, 
     // filteredProducts: [],
@@ -389,7 +403,6 @@ router.post('/api/product', (req, res) => {
   console.log( products );
   
   // Maybe add success
-  // Marcell: adde productsPot to products? 
   res.render("product", { products: products, addToBasket: buttonFuncs.addToBasket, clickBtn: buttonFuncs.clickBtn } );
 
 })
@@ -436,6 +449,7 @@ function constructBasket( user ) {
           productID: p.productID,
           // name: products[2].find( (product) => product.id == basket[user.id][i].productID ).name,
           quantity: basket[user.id][i].quantity,
+          price: findProductPrice( p.productID ),
           basketImage: p.photoUrls
         });
         console.log( p )
@@ -478,6 +492,8 @@ router.get( '/basket', (req, res) => {
   res.render( 'basket', { 
     increaseQuant: buttonFuncs.increaseBasketItemQuantity,
     buyOrder: buttonFuncs.buyOrder,
+    bbasket: basket[users[0].id].length,
+    basketPrice: calcBasketPrice( users[0].id ),
     user: users[0],
     order: li
   } );
@@ -511,141 +527,7 @@ router.post( '/api/basket/buy', (req, res) => {
     res.status(200).send( "success" );
   } else {
     res.status(400).send( "Empty Basket" );
-  }
-
-  
-
-  
+  }  
 } );
-
-// Nikolaj arbejder her //
-// Store calls
-function getStoreInventory(){
-  return basket;
-}
-
-var storeOrders = [] // list of orders
-function postStoreOrder(){
-  for( i = 0; i < storeOrders.length; i++)
-  storeOrders[i] = Order(basket, new Date, placed, false)
-}
-
-function getStoreOrder(id){
-  var found = false;
-  var i;
-  for ( i = 0; i < storeOrders.length; i++){
-    if( id == storeOrders[i].id){
-      found = true;
-      break;
-    }
-  }
-  if (found){
-    //push storeOrders[i];
-  }
-}
-
-function deleteStoreOrder(id){
-  var found = false;
-  var i;
-  for ( i = 0; i < storeOrders.length; i++){
-    if( id == storeOrders[i].id){
-      found = true;
-      break;
-    }
-  }
-  if(found){
-    storeOrders.splice[i,1];
-  }
-}
-
-// User calls
-router.post('/user', (req, res) => {
-  
-  console.log( req.body );
-  req.body.username
-  req.body.firstName
-  req.body.lastName
-  req.body.email
-  req.body.password
-  req.body.phone
-  req.body.userStatus 
-  users.push( new User(username, firstname, lastname, email, password, phone, userStatus) );
-  
-  console.log( user );
-  res.end()
-})
-function postCreatedUser(){
-  // push users[users.length-1]
-}
-function postAllUsers(){
-  // push users
-}
-
-var loginUser = []
-router.post('/***', (req,res) => {
-
-  console.log(req.body);
-  req.body.username
-  req.body.password
-  loginUser.push(username)
-  loginUser.push(password)
-})
-
-function userLogin(){
-  var found = false;
-  for(i = 0; i < users.length; i++){7
-    if( users[i].username == loginUser[0] && users[i].password == loginUser[1]){
-      found = true;
-      break;
-    }
-  }
-  loginUser.length = 0;
-  if(found){
-    // login user
-  }
-  
-}
-function userLogout(){
-  // logout user
-}
-function getUser(username){
-  var found = false;
-  var i;
-  for(i = 0; i < users.length; i++){
-    if(users[i].username == username){
-      found = true;
-      break;
-    }
-  }
-  if(found){
-    //push users[i]
-  }
-}
-function updateUserProfile(username){
-  var found = false;
-  var i;
-  for(i = 0; i < users.length; i++){
-    if(users[i].username == username){
-      found = true;
-      break;
-    }
-  }
-  if(found){
-    // change user
-  }
-}
-function deleteUser(username){
-  var found = false;
-  var i;
-  for(i = 0; i < users.length; i++){
-    if(users[i].username == username){
-      found = true;
-      break;
-    }
-  }
-  if(found){
-    users.splice(i,1)
-  }
-}
 
 module.exports = router;

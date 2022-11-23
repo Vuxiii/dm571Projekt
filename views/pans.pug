@@ -1,21 +1,21 @@
 extends layout
 
 block layout-content
-    script.
-      
-      function onAddToBasketClick( userid, id ) {
-        fun = #{addToBasket}
-        fun( userid, id )
-      }
-    - var n = 0
-    div.divForheader
+  script.
+    
+    function onAddToBasketClick( userid, id ) {
+      fun = #{addToBasket}
+      fun( userid, id )
+    }
+  div.divForheader
     each list in products
       div.center
         each product in list
-          div.center
-            .imageClass
-              p= product.id
-              // img.picView(src= ('`' + product.photoUrls + '`') alt='login' style='width:100px; height:100px;')
-              img.picView(src="p".replace("p", product.photoUrls) alt='login' style='width:120px; height:120px;')
-              .center
-                button.basketB(onclick='onAddToBasketClick( ' + user.id + ', ' + product.id + ' )') Add to basket
+          if product.category.name == selectedCategory 
+            div.center
+              .imageClass
+                p= product.name
+                p= "Pris: " + product.price
+                img.picView(src="p".replace("p", product.photoUrls) alt='login' style='width:120px; height:120px;')
+                .centerBuy
+                  button.basketB(onclick='onAddToBasketClick( ' + user.id + ', ' + product.id + ' )') Add to basket

@@ -239,15 +239,14 @@ button{
 
 .myView {
   flex: 1;
-  display: flex;
-  flex-direction: column;
+  /* display: flex; */ 
+  /* flex-direction: column; */
   justify-content: space-between;
   align-items: flex-start;
+  /* height: 100%;*/
+  /* width: 100%; */ 
 
-  height: 100%;
-  width: 100%;
-
-  padding: 20px;
+  padding: 120px;
 
   background-size: cover;
 
@@ -268,7 +267,7 @@ button{
 
 .imageClass{
   margin-bottom: 10px;
-  margin-top: 100px;
+  margin-top: 50px;
 
 }
 
@@ -280,6 +279,7 @@ button{
 
 .divForheader{
   margin-top: 100px;
+  margin-bottom: 20px;
 
 }
 
@@ -297,9 +297,22 @@ button{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 120px;
+  height: 300px;
+  /* margin-top: 50px;*/
+  /* margin-bottom: 100px; */
   margin-top: 50px;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
+}
+
+.centerBuy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  /* margin-top: 50px;*/
+  /* margin-bottom: 100px; */
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .basketDiv {
@@ -340,3 +353,20 @@ button{
 .basketCounter{
   color: red;
 }
+/* Nyt */
+.row1 {
+  display: flex;
+  /* background-color: white; */
+}
+
+/* Create two equal columns that sits next to each other */
+.column1 {
+  flex: 50%;
+  /* background-color: white;
+  color: white;
+  style: white;
+  /* padding: 10px; */
+  /* height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Basket: Receipt */ 
