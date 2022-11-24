@@ -1,6 +1,8 @@
 var express = require('express');
+// import express from 'express';
 // axios.defaults.baseURL = 'localhost:/3000';
 var router = express.Router();
+
 var nextPanID = 0;
 var nextOrderID = 0;
 var userID = 0;
@@ -530,4 +532,6 @@ router.post( '/api/basket/buy', (req, res) => {
   }  
 } );
 
-module.exports = router;
+module.exports = { router, findProductPrice, basket, addItemToBasket, BasketItem, users, products, calcBasketPrice };
+// module.exports.findProductPrice = findProductPrice;
+// module.exports.router = router;
